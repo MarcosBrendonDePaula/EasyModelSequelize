@@ -1,0 +1,154 @@
+.view{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+.leftPainel{
+    border: 1px solid crimson;
+    width: 40%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.topo{
+    display: flex;
+    height: 5%;
+    border: 1px solid black;
+}
+
+.topo .centralText{
+    width: 91%;
+    height: 100%;
+}
+
+.topo button {
+    width: 9%;
+    height: 100%;
+}
+
+.NewModel img{
+    width: 100%;
+    height: 100%;
+}
+
+.centralText{
+    text-align: center;
+    width: 100%;
+    height: 4%;
+}
+
+.ModelsList{
+    width: 100%;
+    height: 96%;
+}
+
+.ModelSelection {
+    display: flex;
+    width: 98%;
+    height: 10%;
+    justify-content: space-between;
+    border: 1px solid green;
+    align-content: center;
+}
+
+.ModelSelection .menu{
+    width: 78%;
+    height: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.ModelSbtn{
+    width: 10%;
+    height: 10%;
+}
+
+.ModelSbtn img{
+    width: 100%;
+    height: 100%;
+}
+
+.rightPainel{
+    border: 1px solid black;
+    width: 57%;
+    height: 100%;
+}
+
+.rightPainel .Fields {
+    width: 100%;
+    height: 70%;
+}
+
+.rightPainel .Fields ul{
+    height: 100%;
+    width: 90%;
+}
+
+.rightPainel .Fields li{
+    width: 100%;
+}
+
+.rightPainel .SaveModel img{
+    width: 100%;
+    height: 100%;
+}
+
+.rightPainel .Fields .NewField{
+    width: 8%;
+    height: 10%;
+}
+
+.rightPainel .Fields .NewField img{
+    width: 100%;
+    height: 100%;
+}
+
+.NewField {
+    position: relative;
+    left: 25px;
+}
+
+.flex{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.hidden{
+    visibility: hidden;
+}
+
+.center{
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.PropietiesEditor{
+    width: 80vw;
+    height: 90vh;
+    position: fixed;
+    border: 1px solid black;
+    z-index: 10;
+    background-color: rgb(255, 255, 255);
+}
+
+.diblock{
+    display: inline-block
+}
+
+.FieldDelBtn {
+    height: 20px;
+}
+
+button img{
+    width: 100%;
+    height: 100%;
+}
+
+.PropietiesEditor .flex {
+    display: flex;
+    justify-content: initial;
+    width: 100%;
+}

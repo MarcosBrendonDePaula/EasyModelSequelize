@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="Generates.js"></script>
+        <script src="java.js" defer></script>
+    </head>
+    <body>
+        
+        <div class="PropietiesEditor center hidden">
+            <div class="PropMenu">
+
+            </div>
+            <div style="float: right;">
+                <button id="SavePropitiesBtn">Save</button>
+                <button id="CancelPropitiesBtn">Cancel</button>
+            </div>    
+        </div>
+
+        <div class="view">
+            <div class="leftPainel">
+                <div class="topo">
+                    <div class="centralText">
+                        <span>Models</span>
+                    </div>
+                    <button class="NewModel">
+                        <img src="https://img.icons8.com/nolan/64/add.png"/>
+                    </button>
+                </div>
+                <div class="ModelsList">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+            <div class="rightPainel">
+                <div class="topo">
+                    <div class="centralText">
+                        <span class="M_name"></span>
+                    </div>
+                    <button class="SaveModel">
+                        <img src="https://img.icons8.com/nolan/64/save.png"/>
+                    </button>
+                </div>
+                <div style="border: 1px solid black;">
+                    <div style="width: 100%;text-align: center;">
+                        <span>Fields</span>
+                    </div>
+                    <div class="Fields">
+                        <ul>
+                        </ul>
+                        <button class="NewField">
+                            <img src="https://img.icons8.com/nolan/64/add.png"/>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form action="/gen" method="POST" >
+            <input name="Models" type="text" class="FormModels">
+            <input name="ID" type="text" class="ID">
+            <button type="submit">Gerar</button>
+        </form>
+    </body>
+</html>
