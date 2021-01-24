@@ -2,7 +2,7 @@
 const emptyModel = {
     name:`undefined`,
     Fields:[],
-    Assosiations:[]
+    Associations:[]
 }
 
 //empty config model
@@ -86,8 +86,10 @@ function NewTextArea(classList_=[],Childs=[]){
     return obj
 }
 
-function NewButton(classList_=[],Childs=[]) {
+function NewButton(classList_=[],Childs=[],action = undefined,) {
     let obj = document.createElement('button')
+    if(action)
+        obj.addEventListener(action.event,action.function)
     AppChilds(obj,Childs)
     AppClass(obj,classList_)
     return obj
@@ -100,6 +102,23 @@ function NewImg(classList_=[],Childs=[],src="") {
     AppClass(obj,classList_)
     return obj
 }
+
+function NewSelect(classList_=[],Childs=[]) {
+    let obj = document.createElement('select')
+    AppChilds(obj,Childs)
+    AppClass(obj,classList_)
+    return obj
+}
+
+function NewOption(classList_=[],Childs=[],text="",value=undefined) {
+    let obj = document.createElement('option')
+    obj.value = (value)?value:text
+    obj.text = text
+    AppChilds(obj,Childs)
+    AppClass(obj,classList_)
+    return obj
+}
+
 //Generate a Model Structure
 function GenModelStructure() {
     idCounter+=1
@@ -406,4 +425,35 @@ function GenPropMenuOptions(type,config = {}) {
     }
     return null
 
+}
+
+function GenNewAssociation() {
+    let models = document.querySelector('.ModelsList').querySelector('ul').querySelectorAll('li')
+    let options = []
+    
+    for(let model of models) {
+        let option = NewOption([],[],model.querySelector('.Mname').textContent)
+        options.push(option)
+    }
+
+    let li = document.createElement('li')
+    li.appendChild(NewDiv(['Association'],[
+        NewDiv(['flex'],[
+            NewDiv([],[
+                NewSelect([],[
+                    NewOption([],[],"1:1"),
+                    NewOption([],[],"1:M"),
+                    NewOption([],[],"M:N")
+                ]),
+                NewSpan("To:"),
+                NewSelect([],options)
+            ]),
+            NewDiv([],[
+                NewButton([],[
+                    NewImg([],[],"https://img.icons8.com/nolan/64/delete-sign.png")
+                ],action = {event:"click",function:delAssociation})
+            ])
+        ])
+    ]))
+    return li
 }

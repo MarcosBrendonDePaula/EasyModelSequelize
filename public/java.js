@@ -5,17 +5,21 @@ const newFieldbtn = document.querySelector('.NewField')
 const PropietiesEditor = document.querySelector('.PropietiesEditor')
 const SavePropitiesBtn = document.querySelector('#SavePropitiesBtn')
 const CancelPropitiesBtn = document.querySelector('#CancelPropitiesBtn')
+const GenNewAssociationBtn = document.querySelector('.NewAssociation')
+const Associations =  document.querySelector(".Associations").querySelector('ul')
+
 
 var idCounter = 1
 var ActualModel = undefined
 var ActualField = undefined 
 
 //Basic Actions
-NewModelBtn.addEventListener('click',AddNewModel)
+NewModelBtn.addEventListener('click',AddNewModel),
 SaveModelBtn.addEventListener('click',SaveModel)
 newFieldbtn.addEventListener('click',addField)
 SavePropitiesBtn.addEventListener('click',SavePropieties)
 CancelPropitiesBtn.addEventListener('click',CancelPropieties)
+GenNewAssociationBtn.addEventListener('click',AddNewAssociation)
 
 //Generate GUI to model edit
 function SetModelEditView(ModelDiv){
@@ -29,7 +33,7 @@ function SetModelEditView(ModelDiv){
     let Model_name = rightPainel.querySelector(".M_name")
     let Fields_Area = rightPainel.querySelector(".Fields").querySelector("ul")
     Fields_Area.innerHTML=""
-
+    Associations.innerHTML=""
     for(let field of config.Fields) {
         let newField = GenFieldStructure()
         let AllDivs = newField.querySelectorAll('div')
@@ -43,6 +47,14 @@ function SetModelEditView(ModelDiv){
         
         Fields_Area.appendChild(newField)
     }
+    
+    for(let assoc of config.Associations) {
+        let newA = GenNewAssociation()
+        newA.querySelector('div').querySelectorAll('div')[0].querySelectorAll('select')[0].value = assoc.type
+        newA.querySelector('div').querySelectorAll('div')[0].querySelectorAll('select')[1].value = assoc.to
+        Associations.appendChild(newA)
+        console.log(newA)
+    }
 
     Model_name.textContent = config.name
 }
@@ -55,9 +67,16 @@ function AddNewModel(){
 //Delete Model Structure
 function RemoveModel(event) {
     let divAtual = event.target
+    
     if(divAtual.nodeName=='IMG'){
         divAtual = divAtual.parentElement
     }
+
+    if(ActualModel == divAtual.parentElement.parentElement)
+    {
+        ActualModel = undefined
+    }
+
     divAtual = divAtual.parentElement.parentElement.parentElement
     let pai = divAtual.parentElement
     pai.removeChild(divAtual)
@@ -105,7 +124,7 @@ function EditPropieties(event) {
     ActualField = event.target.parentElement
 
     let config = JSON.parse(event.target.parentElement.getAttribute('data-config'))
-    console.log(config)
+
     document.querySelector('.P_K').checked = (config.PK)?config.PK:false
     document.querySelector('.N_N').checked = (config.NN)?config.NN:false
     
@@ -151,19 +170,47 @@ function SaveModel(event){
     let AllFields = Fields_Area.querySelectorAll('li')
     
     Config['Fields'] = []
-
-    for(let field of AllFields){
-        let pai = field.querySelector('div')
-        let AllDivs = pai.querySelectorAll('div')
-        let nconf={
-            name:AllDivs[0].querySelector('input').value,
-            type:AllDivs[1].querySelector('select').value,
-            propieties:JSON.parse(AllDivs[1].getAttribute('data-config'))
+    if(AllFields)
+        for(let field of AllFields){
+            let pai = field.querySelector('div')
+            let AllDivs = pai.querySelectorAll('div')
+            let nconf={
+                name:AllDivs[0].querySelector('input').value,
+                type:AllDivs[1].querySelector('select').value,
+                propieties:JSON.parse(AllDivs[1].getAttribute('data-config'))
+            }
+            Config['Fields'].push(nconf)
         }
-        Config['Fields'].push(nconf)
-    }
+    
+    Config['Associations']=[]
+    
+    let associations = Associations.querySelectorAll('li')
+    if(associations)
+        for(let assoc of associations){
+            let pai = assoc.querySelector('div')
+            let AssocDiv = pai.querySelector('div')
+            let nconf={
+                type:AssocDiv.querySelector('div').querySelectorAll('select')[0].value,
+                to:AssocDiv.querySelector('div').querySelectorAll('select')[1].value,
+            }
+            Config['Associations'].push(nconf)
+        }
+
+
     ActualModel['model'].setAttribute('data-config',JSON.stringify(Config))
     GetModels()
+}
+
+function AddNewAssociation() {
+    Associations.appendChild(GenNewAssociation())
+}
+
+function delAssociation(event) {
+    let divAtual = event.target
+    if(divAtual.nodeName=='IMG'){
+        divAtual = divAtual.parentElement
+    }
+    document.querySelector('.Associations').querySelector('ul').removeChild(divAtual.parentElement.parentElement.parentElement.parentElement)
 }
 
 function GetModels() {
@@ -174,5 +221,8 @@ function GetModels() {
         let config = JSON.parse(divModel.getAttribute('data-config')) 
         Models.push(config)
     }
+
+    //let associations = Associations.querySelector('ul').querySelectorAll('li')
+
     document.querySelector('.FormModels').value = JSON.stringify(Models)
 }
