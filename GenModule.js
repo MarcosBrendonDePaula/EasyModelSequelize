@@ -1,5 +1,7 @@
 const fs = require('fs');
 const zlib = require('zlib');
+const rimraf = require("rimraf")
+
 var archiver = require('archiver');
 const path = require('path')
 let directory = path.join(__dirname,"public")
@@ -49,7 +51,10 @@ async function MakeModels(Models=[],id=0,req,res) {
     var output = fs.createWriteStream(`${directory}/${id}/files.zip`);
 
     output.on('close', function() {
-		res.redirect(`/${id}/files.zip`)
+        res.redirect(`/${id}/files.zip`)
+        setTimeout(function() {
+            rimraf(dir,()=>{})
+        }, 120000);
     });
     
 
