@@ -37,13 +37,31 @@ async function MakeModels(Models=[],id=0,req,res) {
             propties+="\r\t}"
             fields+=`\r\t${field.name}:${propties},`
         }
+        
+        let requires = []
+        for(let assoc of model.Associations) {
+            let field = `const ${assoc.to} = require('./${assoc.to}')`
+            if(requires.includes(field)===false)
+                requires.push(field)
+        }
+        
+        Texrequires = "\r"
+        for(let r of requires) {
+            Texrequires+=r
+        }
 
-        let layout = `\rconst Sequelize = require('sequelize')
-            \rconst db = global.sequelize
-            \rconst ${model.name} = db.define(' ${model.name}', {
-            \r\t${fields}
-            \r})
-            \rmodule.exports = ${model.name}`
+        associations = ""
+        
+        let layout = `\rconst Sequelize = require('sequelize')`+
+            `\rconst db = global.sequelize`+
+            `\r${requires}`+
+            `\rconst ${model.name} = db.define('${model.name}', {`+
+            `\r\t${fields}`+
+            `\r})`+
+            `\r//associations`+
+            `\r${associations}`+
+            `\rmodule.exports = ${model.name}`
+
         fs.writeFileSync(`${dir}/${model.name}.js`,layout)
         listOfFiles.push({dir:`${dir}/${model.name}.js`,fname:`${model.name}.js`})
     }
