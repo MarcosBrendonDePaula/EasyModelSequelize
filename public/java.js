@@ -228,4 +228,4 @@ function GetModels() {
 }
 
 
-document.querySelector('.ID').value = Math.random()*90000
+document.querySelector('.ID').value = Math.floor(Math.random() * 8000)
