@@ -75,9 +75,9 @@ async function MakeModels(Models=[],id=0,req,res) {
             `\r${requires}`+
             `\rconst ${model.name} = sequelize.define('${model.name}', {`+
             `\r\t${fields}`+
-            `\r})`+
+            `\r});`+
             `\r//associations`+
-            `\r${assocTex};`+
+            `\r${assocTex}`+
             `\r(async()=>{`+
             `\r\tawait sequelize.sync();`+
             `\r})();`+
