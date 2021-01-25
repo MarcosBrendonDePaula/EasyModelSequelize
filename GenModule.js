@@ -50,16 +50,36 @@ async function MakeModels(Models=[],id=0,req,res) {
             Texrequires+=r
         }
 
-        associations = ""
+        let assocTex = ""
+        for(let assoc of model.Associations) {
+            switch(assoc.type) {
+                case "1:1": {
+                    assocTex+=`${model.name}.hasOne(${assoc.to})`
+                    break
+                }
+                case "1:M": {
+                    assocTex+=`${model.name}.hasMany(${assoc.to})\n`
+                    assocTex+=`${assoc.to}.belongsTo(${model.name})`
+                    break
+                }
+                case "M:N": {
+                    assocTex+=`${model.name}.belongsToMany(${assoc.to})`
+                    break
+                }
+            }
+        }
         
         let layout = `\rconst Sequelize = require('sequelize')`+
-            `\rconst db = global.sequelize`+
+            `\rconst sequelize = global.sequelize`+
             `\r${requires}`+
-            `\rconst ${model.name} = db.define('${model.name}', {`+
+            `\rconst ${model.name} = sequelize.define('${model.name}', {`+
             `\r\t${fields}`+
             `\r})`+
             `\r//associations`+
-            `\r${associations}`+
+            `\r${assocTex}`+
+            `\r(async()=>{`+
+            `\r\tawait sequelize.sync();`+
+            `\r})()`+
             `\rmodule.exports = ${model.name}`
 
         fs.writeFileSync(`${dir}/${model.name}.js`,layout)
@@ -80,14 +100,13 @@ async function MakeModels(Models=[],id=0,req,res) {
         gzip: true,
         zlib: { level: 9 } // Sets the compression level.
     });
+
     archive.pipe(output);
 
     for(let i of listOfFiles) {
         archive.append(fs.createReadStream(i.dir), {name: i.fname});
     }
     archive.finalize();
-	
-    
 }
 
 module.exports = {
