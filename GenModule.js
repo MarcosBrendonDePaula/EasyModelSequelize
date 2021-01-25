@@ -77,10 +77,10 @@ async function MakeModels(Models=[],id=0,req,res) {
             `\r\t${fields}`+
             `\r})`+
             `\r//associations`+
-            `\r${assocTex}`+
+            `\r${assocTex};`+
             `\r(async()=>{`+
             `\r\tawait sequelize.sync();`+
-            `\r})()`+
+            `\r})();`+
             `\rmodule.exports = ${model.name}`
 
         fs.writeFileSync(`${dir}/${model.name}.js`,layout)
