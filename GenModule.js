@@ -6,6 +6,14 @@ var archiver = require('archiver');
 const path = require('path')
 let directory = path.join(__dirname,"public")
 
+function existModel(Models,name) {
+    for(let model of Models) {
+        if(model.name===name)
+            return true
+    }
+    return false
+}
+
 async function MakeModels(Models=[],id=0,req,res) {
 	if(!fs.existsSync(`${directory}/${id}`)){
         fs.mkdirSync(`${directory}/${id}`)
@@ -41,8 +49,17 @@ async function MakeModels(Models=[],id=0,req,res) {
         let requires = []
         for(let assoc of model.Associations) {
             let field = `const ${assoc.to} = require('./${assoc.to}')`
-            if(requires.includes(field)===false)
+            
+            if(requires.includes(field)==false){
                 requires.push(field)
+            }
+
+            if(assoc.type=="M:N") {
+                if(existModel(Models,`${model.name}_${assoc.to}`)) {
+                    let requer = `\nconst ${model.name}_${assoc.to} = require('./${model.name}_${assoc.to}')`
+                    requires.push(requer)
+                }
+            }
         }
         
         Texrequires = "\r"
@@ -63,8 +80,15 @@ async function MakeModels(Models=[],id=0,req,res) {
                     break
                 }
                 case "M:N": {
-                    assocTex+=`${model.name}.belongsToMany(${assoc.to},{ through: '${model.name}_${assoc.to}'});\n`
-                    assocTex+=`${assoc.to}.belongsToMany(${model.name},{ through: '${model.name}_${assoc.to}'});`
+                    let exist = existModel(Models,`${model.name}_${assoc.to}`)
+                    if(!exist) {
+                        assocTex+=`${model.name}.belongsToMany(${assoc.to},{ through: '${model.name}_${assoc.to}'});\n`
+                        assocTex+=`${assoc.to}.belongsToMany(${model.name},{ through: '${model.name}_${assoc.to}'});`
+                    }else {
+                        assocTex+=`${model.name}.belongsToMany(${assoc.to},{ through: ${model.name}_${assoc.to}});\n`
+                        assocTex+=`${assoc.to}.belongsToMany(${model.name},{ through: ${model.name}_${assoc.to}});`
+                    }
+                    
                     break
                 }
             }

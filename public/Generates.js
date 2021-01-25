@@ -86,10 +86,12 @@ function NewTextArea(classList_=[],Childs=[]){
     return obj
 }
 
-function NewButton(classList_=[],Childs=[],action = undefined,) {
+function NewButton(classList_=[],Childs=[],action = undefined,text=undefined) {
     let obj = document.createElement('button')
     if(action)
         obj.addEventListener(action.event,action.function)
+    if(text)
+        obj.textContent=text
     AppChilds(obj,Childs)
     AppClass(obj,classList_)
     return obj
