@@ -48,7 +48,7 @@ async function MakeModels(Models=[],id=0,req,res) {
         
         let requires = []
         for(let assoc of model.Associations) {
-            let field = `const ${assoc.to} = require('./${assoc.to}')`
+            let field = `const ${assoc.to} = require('./${assoc.to}')\n`
             
             if(requires.includes(field)==false){
                 requires.push(field)
@@ -56,7 +56,7 @@ async function MakeModels(Models=[],id=0,req,res) {
 
             if(assoc.type=="M:N") {
                 if(existModel(Models,`${model.name}_${assoc.to}`)) {
-                    let requer = `\nconst ${model.name}_${assoc.to} = require('./${model.name}_${assoc.to}')`
+                    let requer = `const ${model.name}_${assoc.to} = require('./${model.name}_${assoc.to}')\n`
                     requires.push(requer)
                 }
             }
