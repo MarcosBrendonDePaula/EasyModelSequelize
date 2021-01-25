@@ -54,17 +54,17 @@ async function MakeModels(Models=[],id=0,req,res) {
         for(let assoc of model.Associations) {
             switch(assoc.type) {
                 case "1:1": {
-                    assocTex+=`${model.name}.hasOne(${assoc.to})`
+                    assocTex+=`${model.name}.hasOne(${assoc.to});`
                     break
                 }
                 case "1:M": {
-                    assocTex+=`${model.name}.hasMany(${assoc.to})\n`
-                    assocTex+=`${assoc.to}.belongsTo(${model.name})`
+                    assocTex+=`${model.name}.hasMany(${assoc.to});\n`
+                    assocTex+=`${assoc.to}.belongsTo(${model.name});`
                     break
                 }
                 case "M:N": {
-                    assocTex+=`${model.name}.belongsToMany(${assoc.to},{ through: '${model.name}_${assoc.to}'})\n`
-                    assocTex+=`${assoc.to}.belongsToMany(${model.name},{ through: '${model.name}_${assoc.to}'})`
+                    assocTex+=`${model.name}.belongsToMany(${assoc.to},{ through: '${model.name}_${assoc.to}'});\n`
+                    assocTex+=`${assoc.to}.belongsToMany(${model.name},{ through: '${model.name}_${assoc.to}'});`
                     break
                 }
             }
