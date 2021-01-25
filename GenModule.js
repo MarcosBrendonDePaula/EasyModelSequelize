@@ -63,7 +63,8 @@ async function MakeModels(Models=[],id=0,req,res) {
                     break
                 }
                 case "M:N": {
-                    assocTex+=`${model.name}.belongsToMany(${assoc.to})`
+                    assocTex+=`${model.name}.belongsToMany(${assoc.to},{ through: '${model.name}_${assoc.to}'})\n`
+                    assocTex+=`${assoc.to}.belongsToMany(${model.name},{ through: '${model.name}_${assoc.to}'})`
                     break
                 }
             }
