@@ -220,7 +220,7 @@ function GenPropMenuOptions(type,config = {}) {
     ]);
    
     let notNull = NewDiv(classList_=['flex'],Childs=[
-        NewSpan(text="notNull"),
+        NewSpan(text="AllowNull"),
         NewCheckBox(classList_=['N_N'])
     ])
 

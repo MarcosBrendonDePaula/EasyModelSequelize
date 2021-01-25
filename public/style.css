@@ -1,3 +1,6 @@
+span{
+    font-size:calc(0.5vw + 11.74px)
+} 
 .view{
     width: 100vw;
     height: 100vh;
