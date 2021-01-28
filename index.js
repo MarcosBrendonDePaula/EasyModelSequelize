@@ -1,7 +1,9 @@
 const Express = require('express')
 const path = require('path')
+
 const bodyparser = require('body-parser')
 const {MakeModels} = require('./GenModule')
+
 const { type } = require('os')
 const app = Express()
 
@@ -14,5 +16,7 @@ app.post("/gen",(req,res)=>{
     MakeModels(JSON.parse(req.body.Models),req.body.ID,req,res)
 });
 
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 
-app.listen((process.env.PORT || 8080))
+http.listen((process.env.PORT || 8080))

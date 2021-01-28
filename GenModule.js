@@ -71,24 +71,23 @@ async function MakeModels(Models=[],id=0,req,res) {
         for(let assoc of model.Associations) {
             switch(assoc.type) {
                 case "1:1": {
-                    assocTex+=`${model.name}.hasOne(${assoc.to});`
+                    assocTex+=`${model.name}.hasOne(${assoc.to});\n`
                     break
                 }
                 case "1:M": {
                     assocTex+=`${model.name}.hasMany(${assoc.to});\n`
-                    assocTex+=`${assoc.to}.belongsTo(${model.name});`
+                    assocTex+=`${assoc.to}.belongsTo(${model.name});\n`
                     break
                 }
                 case "M:N": {
                     let exist = existModel(Models,`${model.name}_${assoc.to}`)
                     if(!exist) {
                         assocTex+=`${model.name}.belongsToMany(${assoc.to},{ through: '${model.name}_${assoc.to}'});\n`
-                        assocTex+=`${assoc.to}.belongsToMany(${model.name},{ through: '${model.name}_${assoc.to}'});`
+                        assocTex+=`${assoc.to}.belongsToMany(${model.name},{ through: '${model.name}_${assoc.to}'});\n`
                     }else {
                         assocTex+=`${model.name}.belongsToMany(${assoc.to},{ through: ${model.name}_${assoc.to}});\n`
-                        assocTex+=`${assoc.to}.belongsToMany(${model.name},{ through: ${model.name}_${assoc.to}});`
+                        assocTex+=`${assoc.to}.belongsToMany(${model.name},{ through: ${model.name}_${assoc.to}});\n`
                     }
-                    
                     break
                 }
             }
