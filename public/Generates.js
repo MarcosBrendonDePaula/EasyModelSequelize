@@ -122,7 +122,7 @@ function NewOption(classList_=[],Childs=[],text="",value=undefined) {
 }
 
 //Generate a Model Structure
-function GenModelStructure() {
+function GenModelStructure(name = undefined,config=undefined) {
     idCounter+=1
     let li = document.createElement('li')
 
@@ -132,14 +132,23 @@ function GenModelStructure() {
     
     let spanName = document.createElement('span')
     spanName.classList.add('Mname')
-    let tname = prompt("Please enter Table Name", `T: undefined${idCounter}`);
-    if(tname==null || tname.length<1)
-        tname=`T: undefined${idCounter}`
+    let tname = name
+
+    if(name==undefined) {
+        tname = prompt("Please enter Table Name", `T: undefined${idCounter}`);
+        if(tname==null || tname.length<1)
+            tname=`T: undefined${idCounter}`
+    }
+
     spanName.textContent = tname
     
-    let myconf = emptyModel
-    myconf['name'] = tname
-    div.setAttribute('data-config',JSON.stringify(myconf))
+    if(config) {
+        div.setAttribute('data-config',JSON.stringify(config))
+    } else {
+        let myconf = emptyModel
+        myconf['name'] = tname
+        div.setAttribute('data-config',JSON.stringify(myconf))
+    }
 
     let menudiv = document.createElement('div')
     menudiv.classList.add('menu')

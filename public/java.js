@@ -62,6 +62,7 @@ function SetModelEditView(ModelDiv){
 //Create a new Model
 function AddNewModel(){
     document.querySelector('.ModelsList').querySelector('ul').appendChild(GenModelStructure())
+    GetModels()
 }
 
 //Delete Model Structure
@@ -80,6 +81,7 @@ function RemoveModel(event) {
     divAtual = divAtual.parentElement.parentElement.parentElement
     let pai = divAtual.parentElement
     pai.removeChild(divAtual)
+    GetModels()
 }
 
 async function EditModelBtn(event) {
@@ -156,6 +158,7 @@ function SavePropieties(event) {
 
     ActualField.setAttribute("data-config",JSON.stringify(config))
     ActualField=undefined
+    GetModels()
 }
 
 function CancelPropieties(event) {
@@ -227,5 +230,11 @@ function GetModels() {
     document.querySelector('.FormModels').value = JSON.stringify(Models)
 }
 
+function LoadModels() {
+    let Models = JSON.parse(prompt("Please enter Json", `[]`));
+    for(let model of Models) {
+        document.querySelector('.ModelsList').querySelector('ul').appendChild(GenModelStructure(model.name,model))
+    }
+}
 
 document.querySelector('.ID').value = Math.floor(Math.random() * 8000)
