@@ -23,7 +23,7 @@ async function MakeModels(Models=[],id=0,req,res) {
     var listOfFiles = [];
 
     for(model of Models) {
-        fields = "\r"
+        let fields = "\r"
         for(let field of model.Fields) {
             let propties = `\r\t{\r\t\ttype:Sequelize.${field.type},`
 
@@ -48,7 +48,7 @@ async function MakeModels(Models=[],id=0,req,res) {
         
         let requires = []
         for(let assoc of model.Associations) {
-            let field = `const ${assoc.to} = require('./${assoc.to}')\n`
+            let field = `const ${assoc.to} = require('./${assoc.to}')\;\n`
             
             if(requires.includes(field)==false){
                 requires.push(field)
@@ -62,7 +62,7 @@ async function MakeModels(Models=[],id=0,req,res) {
             }
         }
         
-        Texrequires = "\r"
+        let Texrequires = "\r"
         for(let r of requires) {
             Texrequires+=r
         }
@@ -70,15 +70,18 @@ async function MakeModels(Models=[],id=0,req,res) {
         let assocTex = ""
         for(let assoc of model.Associations) {
             switch(assoc.type) {
+                
                 case "1:1": {
                     assocTex+=`${model.name}.hasOne(${assoc.to});\n`
                     break
                 }
+                
                 case "1:M": {
                     assocTex+=`${model.name}.hasMany(${assoc.to});\n`
                     assocTex+=`${assoc.to}.belongsTo(${model.name});\n`
                     break
                 }
+
                 case "M:N": {
                     let exist = existModel(Models,`${model.name}_${assoc.to}`)
                     if(!exist) {
@@ -93,11 +96,12 @@ async function MakeModels(Models=[],id=0,req,res) {
             }
         }
         
-        let layout = `\rconst Sequelize = require('sequelize')`+
+        let layout = `const Sequelize = require('sequelize')`+
             `\rconst sequelize = global.sequelize`+
-            `\r${requires}`+
+            `\r//requires`+
+            `${Texrequires}`+
             `\rconst ${model.name} = sequelize.define('${model.name}', {`+
-            `\r\t${fields}`+
+            `\t${fields}`+
             `\r});`+
             `\r//associations`+
             `\r${assocTex}`+
@@ -116,7 +120,7 @@ async function MakeModels(Models=[],id=0,req,res) {
         res.redirect(`/${id}/files.zip`)
         setTimeout(function() {
             rimraf(dir,()=>{})
-        }, 120000);
+        }, 60000);
     });
     
 
