@@ -3,9 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>SMG V:?</title>
         <link rel="stylesheet" href="style.css">
-        
         <script src="Generates.js"></script>
         <script src="java.js" defer></script>
         <script src="Associations.js" defer></script>
@@ -81,4 +80,15 @@
             <button type="submit">GERAR</button>
         </form>
     </body>
+    <script>
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var version = JSON.parse(this.responseText).version;
+                document.title = `SMG V:${version}`
+            }
+        };
+        xmlhttp.open("GET", "/version", true);
+        xmlhttp.send();
+    </script>
 </html>

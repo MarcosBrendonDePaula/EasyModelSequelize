@@ -16,6 +16,10 @@ app.post("/gen",(req,res)=>{
     MakeModels(JSON.parse(req.body.Models),req.body.ID,req,res)
 });
 
+app.get("/version",(req,res)=>{
+    res.json({version:'0.1.3'})
+});
+
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
