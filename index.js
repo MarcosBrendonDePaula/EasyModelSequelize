@@ -17,7 +17,7 @@ app.post("/gen",(req,res)=>{
 });
 
 app.get("/version",(req,res)=>{
-    res.json({version:'0.1.3'})
+    res.json({version:'0.1.4'})
 });
 
 const http = require('http').Server(app);
