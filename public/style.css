@@ -1,6 +1,7 @@
 span{
     font-size:calc(0.5vw + 11.74px)
-} 
+}
+
 .view{
     width: 100vw;
     height: 100vh;
@@ -62,7 +63,7 @@ span{
     width: 78%;
     height: 100%;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .ModelSbtn{
@@ -201,6 +202,7 @@ button img{
     margin-top: 2px;
     border-radius: 5px;
 }
+
 .Associations ul li div button {
     height: 20px;
 }

@@ -1,7 +1,18 @@
 //empty model model
 const emptyModel = {
     name:`undefined`,
-    Fields:[],
+    Fields:[
+        {
+            "name":"Id",
+            "type":"INTEGER",
+            "propieties":{
+                "PK":false,
+                "NN":false,
+                "AI":true,
+                "DV":""
+            }
+        }
+    ],
     Associations:[]
 }
 

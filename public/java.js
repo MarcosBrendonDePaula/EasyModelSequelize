@@ -235,6 +235,7 @@ function LoadModels() {
     for(let model of Models) {
         document.querySelector('.ModelsList').querySelector('ul').appendChild(GenModelStructure(model.name,model))
     }
+    GetModels()
 }
 
 document.querySelector('.ID').value = Math.floor(Math.random() * 8000)
