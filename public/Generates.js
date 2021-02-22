@@ -29,7 +29,8 @@ const selectionsHTML='<option selected>None</option>'+
 '<option value="REAL">REAL</option>'+
 '<option value="DOUBLE">DOUBLE</option>'+
 '<option value="DECIMAL">DECIMAL</option>'+
-'<option value="DATE">DATE</option>'
+'<option value="DATE">DATE</option>'+
+'<option value="BLOB">BLOB</option>'
 
 function AppClass(obj,List){
     for(let classe of List) {
