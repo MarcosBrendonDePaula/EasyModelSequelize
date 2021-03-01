@@ -6,6 +6,9 @@
         <meta name="msapplication-TileColor" content="#2b5797">
         <meta name="theme-color" content="#ffffff">
 
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,500;1,300&display=swap" rel="stylesheet"> 
+
         <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
@@ -16,7 +19,6 @@
         <link rel="stylesheet" href="style.css">
         <script src="Generates.js"></script>
         <script src="java.js" defer></script>
-        <script src="Associations.js" defer></script>
         <!-- <script src="socket.io.js"></script> -->
 
     </head>
@@ -31,17 +33,21 @@
                 <button id="CancelPropitiesBtn">Cancel</button>
             </div>    
         </div>
-
         <div class="view">
             <div class="leftPainel">
                 <div class="topo">
+                    <form action="/gen" method="POST" class="GenerateForm" >
+                        <input name="Models" type="text" value="[]" class="FormModels hidden">
+                        <input name="ID" type="text" class="ID hidden">
+                        <button type="submit" class="GenerateBtn">DOWNLOAD</button>
+                    </form>
                     <div class="centralText">
                         <span>Models</span>
                     </div>
                     <button class="NewModel">
                         <img src="https://img.icons8.com/nolan/64/add.png"/>
                     </button>
-                    <button onclick="LoadModels()">Load</button>
+                    <button onclick="LoadModels()">LOAD</button>
                 </div>
                 <div class="ModelsList">
                     <ul>
@@ -83,14 +89,12 @@
                 </div>
             </div>
         </div>
-        <form action="/gen" method="POST" >
-            <input name="Models" type="text" value="[]" class="FormModels">
-            <input name="ID" type="text" class="ID">
-            <button type="submit">GERAR</button>
-        </form>
     </body>
     <footer>
-        <button onclick="DownloadBackup()">Save Backup</button>
+        <div style="margin-top: 1%;display:flex;justify-content: space-between">
+            <button onclick="DownloadBackup()">Save Backup</button>
+            <div style="display: inline-block;"><span>Load Backup</span><input class="file_to_load" type="file" onchange="readTextFile()"></div>
+        </div>
     </footer>
     <script>
         var xmlhttp = new XMLHttpRequest();

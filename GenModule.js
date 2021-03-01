@@ -20,7 +20,10 @@ async function MakeModels(Models=[],id=0,req,res) {
     }
 
     let dir = `${directory}/${id}`
-    var listOfFiles = [];
+
+    //save backup
+    fs.writeFileSync(`${dir}/db.json`,JSON.stringify(Models))
+    var listOfFiles = [{dir:`${dir}/db.json`,fname:`db.json`}];
 
     for(model of Models) {
         let fields = "\r"

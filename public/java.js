@@ -98,7 +98,7 @@ async function EditModelBtn(event) {
 
 function addField() {
     if(ActualModel==undefined) {
-        alert("Você não está editando nenhum model!")
+        alert("You are not editing any templates, create them before trying to edit.")
         return
     }
     let field = GenFieldStructure()
@@ -238,7 +238,6 @@ function LoadModels() {
     GetModels()
 }
 
-document.querySelector('.ID').value = Math.floor(Math.random() * 8000)
 
 
 function download(data, filename="database.json", type='application/json') {
@@ -262,3 +261,23 @@ function download(data, filename="database.json", type='application/json') {
 function DownloadBackup() {
     download(document.querySelector('.FormModels').value)
 }
+
+function readTextFile()
+{
+    
+    var file = document.querySelector(".file_to_load").files[0];
+    var reader = new FileReader();
+    reader.readAsText(file, "UTF-8");
+    reader.onload = function (evt) {
+        Models = JSON.parse(evt.target.result)
+        for(let model of Models) {
+            document.querySelector('.ModelsList').querySelector('ul').appendChild(GenModelStructure(model.name,model))
+        }
+        GetModels()
+    }
+    reader.onerror = function (evt) {
+        console.log("erro")
+    }
+}
+
+document.querySelector('.ID').value = Math.floor(Math.random() * 8000)

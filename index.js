@@ -7,7 +7,8 @@ const {MakeModels} = require('./GenModule')
 const { type } = require('os')
 const app = Express()
 
-app.use(bodyparser.urlencoded({extended:false}))
+app.use(bodyparser.urlencoded({limit: '50mb',extended:false}))
+
 app.use(bodyparser.json())
 
 app.use(Express.static(path.join(__dirname,"public")))

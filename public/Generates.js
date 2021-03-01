@@ -199,7 +199,7 @@ function GenFieldStructure() {
     let div1 = document.createElement('div')
     
     let span = document.createElement('span')
-    span.textContent="Field Name:"
+    span.textContent="Field Name:  "
     let input = document.createElement('input')
 
     
@@ -207,7 +207,7 @@ function GenFieldStructure() {
     div2.setAttribute('data-config',JSON.stringify(emptyAtributes))
 
     let span1 = document.createElement('span')
-    span1.textContent = ' Type:'
+    span1.textContent = ' Type:  '
 
     let select = document.createElement('select')
     select.innerHTML = selectionsHTML
@@ -243,19 +243,19 @@ function GenPropMenuOptions(type,config = {}) {
     ]);
    
     let notNull = NewDiv(classList_=['flex'],Childs=[
-        NewSpan(text="AllowNull"),
+        NewSpan(text="AllowNull: "),
         NewCheckBox(classList_=['N_N'])
     ])
 
     switch (type) {
         case "INTEGER" : {
             let AutoIncrement = NewDiv(classList_=['flex'],Childs=[
-                NewSpan(text="AutoIncrement"),
+                NewSpan(text="AutoIncrement: "),
                 NewCheckBox(classList_=['A_I'])
             ])
             
             let defaultValue = NewDiv(classList_=['flex'],Childs=[
-                NewSpan(text="defaultValue"),
+                NewSpan(text="defaultValue: "),
                 NewINumber(classList_=['D_V'])
             ])
 
@@ -269,11 +269,11 @@ function GenPropMenuOptions(type,config = {}) {
 
         case "BIGINT" : {
             let AutoIncrement = NewDiv(classList_=['flex'],Childs=[
-                NewSpan(text="AutoIncrement"),
+                NewSpan(text="AutoIncrement: "),
                 NewCheckBox(classList_=['A_I'])
             ])
             let defaultValue = NewDiv(classList_=['flex'],Childs=[
-                NewSpan(text="defaultValue"),
+                NewSpan(text="defaultValue: "),
                 NewINumber(classList_=['D_V'])
             ])
 
@@ -287,12 +287,12 @@ function GenPropMenuOptions(type,config = {}) {
 
         case "FLOAT" : {
             let AutoIncrement = NewDiv(classList_=['flex'],Childs=[
-                NewSpan(text="AutoIncrement"),
+                NewSpan(text="AutoIncrement: "),
                 NewCheckBox(classList_=['A_I'])
             ])
             
             let defaultValue = NewDiv(classList_=['flex'],Childs=[
-                NewSpan(text="defaultValue"),
+                NewSpan(text="defaultValue: "),
                 NewINumber(classList_=['D_V'])
             ])
 
@@ -306,12 +306,12 @@ function GenPropMenuOptions(type,config = {}) {
 
         case "DOUBLE" : {
             let AutoIncrement = NewDiv(classList_=['flex'],Childs=[
-                NewSpan(text="AutoIncrement"),
+                NewSpan(text="AutoIncrement: "),
                 NewCheckBox(classList_=['A_I'])
             ])
             
             let defaultValue = NewDiv(classList_=['flex'],Childs=[
-                NewSpan(text="defaultValue"),
+                NewSpan(text="defaultValue: "),
                 NewINumber(classList_=['D_V'])
             ])
 
@@ -325,12 +325,12 @@ function GenPropMenuOptions(type,config = {}) {
 
         case "DECIMAL" : {
             let AutoIncrement = NewDiv(classList_=['flex'],Childs=[
-                NewSpan(text="AutoIncrement"),
+                NewSpan(text="AutoIncrement: "),
                 NewCheckBox(classList_=['A_I'])
             ])
             
             let defaultValue = NewDiv(classList_=['flex'],Childs=[
-                NewSpan(text="defaultValue"),
+                NewSpan(text="defaultValue: "),
                 NewINumber(classList_=['D_V'])
             ])
 
@@ -344,7 +344,7 @@ function GenPropMenuOptions(type,config = {}) {
         
         case "DATE" : {
             let defaultValue = NewDiv(classList_=['flex'],Childs=[
-                NewSpan(text="defaultValue"),
+                NewSpan(text="defaultValue: "),
                 NewInput(classList_=['D_V'])
             ])
 
@@ -357,7 +357,7 @@ function GenPropMenuOptions(type,config = {}) {
 
         case "BOOLEAN" : {
             let defaultValue = NewDiv(classList_=['flex'],Childs=[
-                NewSpan(text="defaultValue"),
+                NewSpan(text="defaultValue: "),
                 NewInput(classList_=['D_V'])
             ])
 
@@ -370,12 +370,12 @@ function GenPropMenuOptions(type,config = {}) {
 
         case "REAL" : {
             let AutoIncrement = NewDiv(classList_=['flex'],Childs=[
-                NewSpan(text="AutoIncrement"),
+                NewSpan(text="AutoIncrement: "),
                 NewCheckBox(classList_=['A_I'])
             ])
             
             let defaultValue = NewDiv(classList_=['flex'],Childs=[
-                NewSpan(text="defaultValue"),
+                NewSpan(text="defaultValue: "),
                 NewINumber(classList_=['D_V'])
             ])
 
@@ -389,7 +389,7 @@ function GenPropMenuOptions(type,config = {}) {
 
         case "STRING" : {
             let defaultValue = NewDiv(classList_=['flex'],Childs=[
-                NewSpan(text="defaultValue"),
+                NewSpan(text="defaultValue: "),
                 NewInput(classList_=['D_V'])
             ])
 
@@ -402,7 +402,7 @@ function GenPropMenuOptions(type,config = {}) {
 
         case "TEXT" : {
             let defaultValue = NewDiv(classList_=['flex'],Childs=[
-                NewSpan(text="defaultValue"),
+                NewSpan(text="defaultValue: "),
                 NewTextArea(classList_=['D_V'])
             ])
 
@@ -415,7 +415,7 @@ function GenPropMenuOptions(type,config = {}) {
 
         case "CHAR" : {
             let defaultValue = NewDiv(classList_=['flex'],Childs=[
-                NewSpan(text="defaultValue"),
+                NewSpan(text="defaultValue: "),
                 NewINumber(classList_=['D_V'])
             ])
 
@@ -428,7 +428,7 @@ function GenPropMenuOptions(type,config = {}) {
 
         case "JSON" : {
             let defaultValue = NewDiv(classList_=['flex'],Childs=[
-                NewSpan(text="defaultValue"),
+                NewSpan(text="defaultValue: "),
                 NewInput(classList_=['D_V'])
             ])
 
