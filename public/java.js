@@ -1,4 +1,4 @@
-var socket = io.connect('http://177.23.194.26:25569');
+var socket = io.connect(`https://${window.location.hostname}:80`);
 
 const NewModelBtn = document.querySelector('.NewModel')
 const rightPainel = document.querySelector('.rightPainel')
