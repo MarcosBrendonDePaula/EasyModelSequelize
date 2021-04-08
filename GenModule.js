@@ -100,11 +100,14 @@ async function MakeModels(Models=[],id=0,req,res) {
             }
         }
         
+        let modelname = model.name
+        modelname = modelname.replace(" ","_");
+
         let layout = `const Sequelize = require('sequelize')`+
             `\rconst sequelize = global.sequelize`+
             `\r//requires`+
             `${Texrequires}`+
-            `\rconst ${model.name} = sequelize.define('${model.name}', {`+
+            `\rconst ${modelname} = sequelize.define('${modelname}', {`+
             `\t${fields}`+
             `\r});`+
             `\r//associations`+
@@ -112,7 +115,7 @@ async function MakeModels(Models=[],id=0,req,res) {
             `\r(async()=>{`+
             `\r\tawait sequelize.sync();`+
             `\r})();`+
-            `\rmodule.exports = ${model.name}`
+            `\rmodule.exports = ${modelname}`
 
         fs.writeFileSync(`${dir}/${model.name}.js`,layout)
         listOfFiles.push({dir:`${dir}/${model.name}.js`,fname:`${model.name}.js`})

@@ -1,3 +1,5 @@
+var socket = io.connect('http://177.23.194.26:25569');
+
 const NewModelBtn = document.querySelector('.NewModel')
 const rightPainel = document.querySelector('.rightPainel')
 const SaveModelBtn = document.querySelector('.SaveModel')
@@ -8,7 +10,7 @@ const CancelPropitiesBtn = document.querySelector('#CancelPropitiesBtn')
 const GenNewAssociationBtn = document.querySelector('.NewAssociation')
 const Associations =  document.querySelector(".Associations").querySelector('ul')
 
-
+var Sala_Atual = 0
 var idCounter = 1
 var ActualModel = undefined
 var ActualField = undefined 
@@ -61,7 +63,13 @@ function SetModelEditView(ModelDiv){
 
 //Create a new Model
 function AddNewModel(){
-    document.querySelector('.ModelsList').querySelector('ul').appendChild(GenModelStructure())
+    let model = GenModelStructure()
+    
+    let divModel = model.querySelector('div')
+    let Config = JSON.parse(divModel.getAttribute('data-config'))
+    
+    socket.emit("NewModel",Config)
+    document.querySelector('.ModelsList').querySelector('ul').appendChild(model)
     GetModels()
 }
 
@@ -79,6 +87,7 @@ function RemoveModel(event) {
     }
 
     divAtual = divAtual.parentElement.parentElement.parentElement
+    socket.emit("RemoverModel",JSON.parse(divAtual.querySelector('div').getAttribute("data-config")))
     let pai = divAtual.parentElement
     pai.removeChild(divAtual)
     GetModels()
@@ -199,6 +208,7 @@ function SaveModel(event){
             Config['Associations'].push(nconf)
         }
 
+    socket.emit("Editar_Model",Config)
 
     ActualModel['model'].setAttribute('data-config',JSON.stringify(Config))
     GetModels()
@@ -271,6 +281,7 @@ function readTextFile()
     reader.onload = function (evt) {
         Models = JSON.parse(evt.target.result)
         for(let model of Models) {
+            socket.emit("NewModel",model)
             document.querySelector('.ModelsList').querySelector('ul').appendChild(GenModelStructure(model.name,model))
         }
         GetModels()
@@ -281,3 +292,67 @@ function readTextFile()
 }
 
 document.querySelector('.ID').value = Math.floor(Math.random() * 8000)
+
+function entrar_sala() {
+    let salaId = prompt("Irforme o numero da sala",`${Sala_Atual}`);
+    socket.emit("EntrarSala",{id:salaId})
+}
+
+
+//SocketJs
+socket.on('connect', async(data)=>{
+    socket.emit('CriarSala','');
+});
+
+socket.on('Atualizar',async(data)=>{
+    for(let model of data) {
+        document.querySelector('.ModelsList').querySelector('ul').appendChild(GenModelStructure(model.name,model))
+    }
+    GetModels()
+})
+
+socket.on("remover_model",async(data)=>{
+    console.log("remover:",data)
+    let models = document.querySelector('.ModelsList').querySelector('ul').querySelectorAll('li')
+    for(let model of models) {
+        let config = JSON.parse(model.querySelector("div").getAttribute("data-config"))
+        if(config.name == data.name) {
+            console.log("encontrei")
+            document.querySelector('.ModelsList').querySelector('ul').removeChild(model)
+        }
+    }
+})
+
+socket.on("addModel",(model)=>{
+    document.querySelector('.ModelsList').querySelector('ul').appendChild(GenModelStructure(model.name,model))
+})
+
+socket.on("Atuzlizar_Model",(data)=>{
+    let models = document.querySelector('.ModelsList').querySelector('ul').querySelectorAll('li')
+    for(let model of models) {
+        let config = JSON.parse(model.querySelector("div").getAttribute("data-config"))
+        if(config.name == data.name) {
+            document.querySelector('.ModelsList').querySelector('ul').removeChild(model)
+        }
+    }
+    document.querySelector('.ModelsList').querySelector('ul').appendChild(GenModelStructure(data.name,data))
+})
+
+socket.on("remover_model",(model)=>{
+    let models = document.querySelector('.ModelsList').querySelector('ul').querySelectorAll('li')
+    for(model of models) {
+        let config = JSON.parse(model.querySelector("div").getAttribute("data-config"))
+        if(config.name == model.name) {
+            document.querySelector('.ModelsList').querySelector('ul').removeChild(model)
+        }
+    }
+})
+
+socket.on("sala_atual",(data)=>{
+    Sala_Atual = data.id;
+    document.querySelector("#salaid").textContent = `Sua sala atual é : ${Sala_Atual}`
+})
+
+socket.on('err',async(data)=>{
+    console.log(data)
+})
