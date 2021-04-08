@@ -1,4 +1,5 @@
-var socket = io.connect(`https://${window.location.hostname}:80`);
+var HOST = location.origin.replace(/^http/, 'ws')
+var socket = io.connect(HOST);
 
 const NewModelBtn = document.querySelector('.NewModel')
 const rightPainel = document.querySelector('.rightPainel')
