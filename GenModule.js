@@ -42,9 +42,7 @@ async function MakeModels(Models=[],id=0,req,res) {
                 propties+=`\r\t\tdefaultValue:${field.propieties.DV},`
             }
 
-            if (field.propieties.NN) {
-                propties+=`\r\t\tallowNull:${field.propieties.NN},`
-            }
+            propties+=`\r\t\tallowNull:${field.propieties.NN},`
 
             propties+="\r\t}"
             fields+=`\r\t${field.name}:${propties},`
