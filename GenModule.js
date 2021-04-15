@@ -43,9 +43,9 @@ async function MakeModels(Models=[],id=0,req,res) {
             }
             
             if(field.propieties.NN == undefined) {
-                propties+=`\r\t\tallowNull:false},`
+                propties+=`\r\t\tallowNull:false,`
             }else
-                propties+=`\r\t\tallowNull:false},`
+                propties+=`\r\t\tallowNull:false,`
             
 
             propties+="\r\t}"
