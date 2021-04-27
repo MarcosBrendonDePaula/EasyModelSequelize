@@ -79,6 +79,7 @@ async function MakeModels(Models=[],id=0,req,res) {
                 
                 case "1:1": {
                     assocTex+=`${model.name}.hasOne(${assoc.to});\n`
+					assocTex+=`${assoc.to}.belongsTo(${model.name});\n`
                     break
                 }
                 
