@@ -227,6 +227,11 @@ button img{
 
 
 @media screen and (max-width: 720px) {
+
+    li {
+        list-style-type: none;
+    }
+
     .leftPainel{
         border: 1px solid crimson;
         width: 97vw;
@@ -235,15 +240,30 @@ button img{
         z-index: 1;
         background-color: white;
     }
-
+    .NewModel{
+        margin-right: 5px;
+        width: 25%!important;
+    }
     .rightPainel{
         border: 1px solid crimson;
-        width: 97vw;
-        height: 100%;
+        width: 96vw;
+        height: 80vh;
         overflow-y: auto;
         position: fixed;
         z-index: 10;
         background-color: white;
+    }
+
+    .Associations {
+        width: 93%;
+    }
+
+    .rightPainel .Fields .NewField,.Associations .NewAssociation {
+        width: 16%;
+    }
+
+    .FieldDelBtn, .Associations ul li div button {
+        height: 34px;
     }
 
     .PropietiesEditor {
@@ -256,7 +276,19 @@ button img{
         background-color: white;
     }
 
+    .rightPainel .Fields ul {
+        height: 100%;
+        width: 90%;
+        margin-left: -33px;
+    }
 
+    .Associations ul li {
+        padding: 10px;
+        border: 1px solid crimson;
+        margin-top: 2px;
+        border-radius: 5px;
+        margin-left: -33px;
+    }
 
     .ModelSelection {
         display: flex;
