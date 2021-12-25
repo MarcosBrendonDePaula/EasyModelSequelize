@@ -12,7 +12,7 @@
 
 .view{
     width: 100vw;
-    height: 100vh;
+    height: 90vh;
     display: flex;
 }
 
@@ -223,4 +223,63 @@ button img{
 .GenerateForm button {
     width: 100%;
     height: 100%;
+}
+
+
+@media screen and (max-width: 720px) {
+    .leftPainel{
+        border: 1px solid crimson;
+        width: 97vw;
+        height: 100%;
+        overflow-y: auto;
+        z-index: 1;
+        background-color: white;
+    }
+
+    .rightPainel{
+        border: 1px solid crimson;
+        width: 97vw;
+        height: 100%;
+        overflow-y: auto;
+        position: fixed;
+        z-index: 10;
+        background-color: white;
+    }
+
+    .PropietiesEditor {
+        width: 80vw;
+        height: 90vh;
+        position: fixed;
+        border: 1px solid black;
+        z-index: 11;
+        background-color: rgb(255, 255, 255);
+        background-color: white;
+    }
+
+
+
+    .ModelSelection {
+        display: flex;
+        width: 95%;
+        height: 10%;
+        justify-content: space-between;
+        border: 1px solid green;
+        align-content: center;
+        padding: 2px;
+        margin: 8px 0px 0px 0px;
+        border-radius: 5px;
+    }
+
+    .ModelSelection .menu{
+        width: 55%;
+        height: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .ModelSbtn{
+        margin-left: 8px;
+        width: 20%;
+        height: 10%;
+    }
 }

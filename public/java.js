@@ -1,6 +1,9 @@
 var HOST = location.origin.replace(/^http/, 'ws')
 var socket = io.connect(HOST);
 
+const RightPainel = document.querySelector(".rightPainel")
+RightPainel.classList.toggle("hidden")
+
 const NewModelBtn = document.querySelector('.NewModel')
 const rightPainel = document.querySelector('.rightPainel')
 const SaveModelBtn = document.querySelector('.SaveModel')
@@ -27,7 +30,7 @@ GenNewAssociationBtn.addEventListener('click',AddNewAssociation)
 //Generate GUI to model edit
 function SetModelEditView(ModelDiv){
     let config = JSON.parse(ModelDiv.getAttribute('data-config'))
-
+    RightPainel.classList.toggle("hidden")
     ActualModel = {
         "model":ModelDiv,
         "config":config,
@@ -77,7 +80,6 @@ function AddNewModel(){
 //Delete Model Structure
 function RemoveModel(event) {
     let divAtual = event.target
-    
     if(divAtual.nodeName=='IMG'){
         divAtual = divAtual.parentElement
     }
@@ -178,6 +180,10 @@ function CancelPropieties(event) {
 }
 
 function SaveModel(event){
+
+    RightPainel.classList.toggle("hidden")
+
+
     let Fields_Area = rightPainel.querySelector(".Fields").querySelector("ul")
     let Config = JSON.parse(ActualModel['model'].getAttribute('data-config'))
     let AllFields = Fields_Area.querySelectorAll('li')
