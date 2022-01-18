@@ -4,7 +4,7 @@ const rimraf = require("rimraf")
 
 var archiver = require('archiver');
 const path = require('path')
-let directory = path.join(__dirname,"public")
+let directory = path.join(require.main.path,"public")
 
 function existModel(Models,name) {
     for(let model of Models) {
@@ -14,7 +14,7 @@ function existModel(Models,name) {
     return false
 }
 
-function MakeConnectionModel() {
+function ConnectionLayout() {
     return `"use strict";
 const Sequelize = require('sequelize')
 const fs=require('fs')
@@ -59,8 +59,9 @@ module.exports = {
 }`
 }
 
-async function MakeModels(Models=[],id=0,req,res) {
-	if(!fs.existsSync(`${directory}/${id}`)){
+async function Models_Builder(Models=[],id=0,req,res) {
+	
+    if(!fs.existsSync(`${directory}/${id}`)){
         fs.mkdirSync(`${directory}/${id}`)
     }
 
@@ -69,8 +70,10 @@ async function MakeModels(Models=[],id=0,req,res) {
     //save backup
     fs.writeFileSync(`${dir}/db.json`,JSON.stringify(Models))
     var listOfFiles = [{dir:`${dir}/db.json`,fname:`db.json`}];
+
     let model_space_base = "\r\t\t"
     for(model of Models) {
+        //gerando texto dos campos
         let fields = "\r"
         for(let field of model.Fields) {
             let propties = `${model_space_base}{${model_space_base}\ttype:Sequelize.${field.type},`
@@ -95,8 +98,11 @@ async function MakeModels(Models=[],id=0,req,res) {
 
             propties+=`${model_space_base}}`
             fields+=`${model_space_base}${field.name}:${propties},`
+
         }
         
+
+        //gerando textos de requerimentos
         let requires = []
         for(let assoc of model.Associations) {
             let field = `\r\tconst ${assoc.to} = await require('./${assoc.to}')(sequelize)\;\n`
@@ -113,11 +119,13 @@ async function MakeModels(Models=[],id=0,req,res) {
             }
         }
         
+        //concatenação dos requires
         let Texrequires = "\r"
         for(let r of requires) {
             Texrequires+=r
         }
 
+        //gerando texto de associaçoes
         let assocTex = ""
         for(let assoc of model.Associations) {
             switch(assoc.type) {
@@ -153,7 +161,6 @@ async function MakeModels(Models=[],id=0,req,res) {
 
         let layout = `"use strict";`+
             `\rconst Sequelize = require('sequelize')`+
-
             `\rmodule.exports = async sequelize=> {`+
                 `\r\t//requires`+
                 `\r\t${Texrequires}`+
@@ -168,7 +175,7 @@ async function MakeModels(Models=[],id=0,req,res) {
         listOfFiles.push({dir:`${dir}/${model.name}.js`,fname:`${model.name}.js`})
     }
     
-    fs.writeFileSync(`${dir}/__connect__.js`,MakeConnectionModel())
+    fs.writeFileSync(`${dir}/__connect__.js`,ConnectionLayout())
     listOfFiles.push({dir:`${dir}/__connect__.js`,fname:`__connect__.js`})
 
     var output = fs.createWriteStream(`${directory}/${id}/files.zip`);
@@ -194,6 +201,4 @@ async function MakeModels(Models=[],id=0,req,res) {
     archive.finalize();
 }
 
-module.exports = {
-    MakeModels
-}
+module.exports = Models_Builder
