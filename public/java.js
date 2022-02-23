@@ -30,6 +30,8 @@ GenNewAssociationBtn.addEventListener('click',AddNewAssociation)
 //Generate GUI to model edit
 function SetModelEditView(ModelDiv){
     let config = JSON.parse(ModelDiv.getAttribute('data-config'))
+    if(!RightPainel.classList.contains("hidden"))
+        RightPainel.classList.toggle("hidden")
     RightPainel.classList.toggle("hidden")
     ActualModel = {
         "model":ModelDiv,
