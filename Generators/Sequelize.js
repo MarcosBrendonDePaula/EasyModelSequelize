@@ -21,6 +21,7 @@ const fs=require('fs')
 const path=require('path')
 
 var Models = {}
+var Instance = undefined
 
 module.exports = {
     connect:async ()=>{
@@ -28,7 +29,7 @@ module.exports = {
         const user = 'user'
         const passw = 'passw'
         const ip = 'ip'
-        var sequelize = new Sequelize(db, user, passw, {
+        Instance = new Sequelize(db, user, passw, {
             host: ip,
             dialect: 'postgres',
             //remove if not necessary
@@ -39,23 +40,24 @@ module.exports = {
         });
         
         try {
-            let res = await sequelize.authenticate()
+            let res = await Instance.authenticate()
             const models = fs.readdirSync("./Models")
             for(let i of models) {
                 let file = i.split('.')
                 
                 if (file[1]=="js" && file[0].indexOf("__connect__") != 0) {
-                    let module = await require(path.resolve("Models",file[0]))(sequelize)
+                    let module = await require(path.resolve("Models",file[0]))(Instance)
                     Models[file[0]] = module
                 }
             }
-            await sequelize.sync()
+            await Instance.sync()
         } catch (error) {
             console.log(error)
         }
         return Models
-},
-    Models
+    },
+    Models,
+	Instance
 }`
 }
 
@@ -104,16 +106,17 @@ async function Models_Builder(Models=[],id=0,req,res) {
 
         //gerando textos de requerimentos
         let requires = []
+        
         for(let assoc of model.Associations) {
             let field = `\r\tconst ${assoc.to} = await require('./${assoc.to}')(sequelize)\;\n`
-            
+           
             if(requires.includes(field)==false){
                 requires.push(field)
             }
 
             if(assoc.type=="M:N") {
                 if(existModel(Models,`${model.name}_${assoc.to}`)) {
-                    let requer = `const ${model.name}_${assoc.to} = require('./${model.name}_${assoc.to}')\n`
+                    let requer = `\r\tconst ${model.name}_${assoc.to} = await require('./${model.name}_${assoc.to}')(sequelize);\n`
                     requires.push(requer)
                 }
             }
@@ -143,7 +146,7 @@ async function Models_Builder(Models=[],id=0,req,res) {
                 }
 
                 case "M:N": {
-                    let exist = existModel(Models,`${"model"}_${assoc.to}`)
+                    let exist = existModel(Models,`${model.name}_${assoc.to}`)
                     if(!exist) {
                         assocTex+=`${model_space_base}${"model"}.belongsToMany(${assoc.to},{ through: '${model.name}_${assoc.to}'});\n`
                         assocTex+=`${model_space_base}${assoc.to}.belongsToMany(${"model"},{ through: '${model.name}_${assoc.to}'});\n`
@@ -161,10 +164,16 @@ async function Models_Builder(Models=[],id=0,req,res) {
 
         let layout = `"use strict";`+
             `\rconst Sequelize = require('sequelize')`+
+            `\r//Model cache instance`+
+            `\rvar model = undefined`+
             `\rmodule.exports = async sequelize=> {`+
+                `\r\t//Model Check Instance`+
+                `\r\tif(model) {`+
+                `\r\t\treturn model`+
+                `\r\t}\n`+
                 `\r\t//requires`+
                 `\r\t${Texrequires}`+
-                `\r\tvar model = sequelize.define('${modelname}', {`+
+                `\r\tmodel = sequelize.define('${modelname}', {`+
                 `\r\t\t${fields}`+
                 `\r\t});`+
                 `\r\t//associations`+

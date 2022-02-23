@@ -33,6 +33,8 @@ app.post("/gen",(req,res)=>{
                 Sequelize_Builder(JSON.parse(req.body.Models), req.body.ID, req, res)
             }
         }
+    } else {
+        res.send("Internal Error")
     }
 });
 
