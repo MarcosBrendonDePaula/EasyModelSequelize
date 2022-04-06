@@ -7,7 +7,7 @@ const Sequelize_Builder = require('./Generators/Sequelize')
 const MongoDb_Builder   = require('./Generators/MongoDb')
 const app = Express()
 
-app.use(bodyparser.urlencoded({limit: '50mb',extended:false}))
+app.use(bodyparser.urlencoded({limit: '200mb',extended:false}))
 
 app.use(bodyparser.json())
 
@@ -39,7 +39,7 @@ app.post("/gen",(req,res)=>{
 });
 
 app.get("/version",(req,res)=>{
-    res.json({version:'1.5'})
+    res.json({version:'1.5.5'})
 });
 
 const http = require('http').Server(app);

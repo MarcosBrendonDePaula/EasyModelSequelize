@@ -13,7 +13,6 @@ function existModel(Models,name) {
     }
     return false
 }
-
 function ConnectionLayout() {
     return `"use strict";
 const Sequelize = require('sequelize')
@@ -23,39 +22,43 @@ const path=require('path')
 var Models = {}
 var Instance = undefined
 
-module.exports = {
-    connect:async ()=>{
-        const db = 'db'
-        const user = 'user'
-        const passw = 'passw'
-        const ip = 'ip'
-        Instance = new Sequelize(db, user, passw, {
-            host: ip,
-            dialect: 'postgres',
-            //remove if not necessary
-            define: {
-                freezeTableName: true
-            },
-            //remove if not necessary
-        });
+const database = process.env.SDB    || 'database' 
+const username = process.env.SUSER  || 'ADMIN'
+const password = process.env.SPASSW || 'ADMIN'
+const host     = process.env.SHOST  || '0.0.0.0'
+
+const Connect = async ( Options = {} )=>{
+    Instance = new Sequelize(database, username, password, {
+        host: host,
+        dialect: 'postgres',
+        //remove if not necessary
+        define: {
+            freezeTableName: true
+        },
+    });
+    
+    try {
+        let folder = path.dirname(require.resolve("./__connect__"));
+        let res    = await Instance.authenticate();
         
-        try {
-            let res = await Instance.authenticate()
-            const models = fs.readdirSync("./Models")
-            for(let i of models) {
-                let file = i.split('.')
-                
-                if (file[1]=="js" && file[0].indexOf("__connect__") != 0) {
-                    let module = await require(path.resolve("Models",file[0]))(Instance)
-                    Models[file[0]] = module
-                }
+         
+        const models = fs.readdirSync(folder)
+        for(let i of models) {
+            let file = i.split('.')
+            if (file[1]=="js" && file[0].indexOf("__connect__") != 0) {
+                let module = await require(path.resolve(folder,file[0]))(Instance)
+                Models[file[0]] = module
             }
-            await Instance.sync()
-        } catch (error) {
-            console.log(error)
         }
-        return Models
-    },
+        await Instance.sync()
+    } catch (error) {
+        console.log(error)
+    }
+    return Models
+}
+
+module.exports = {
+    Connect,
     Models,
 	Instance
 }`

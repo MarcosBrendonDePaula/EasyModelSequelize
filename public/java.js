@@ -45,14 +45,10 @@ function SetModelEditView(ModelDiv){
     for(let field of config.Fields) {
         let newField = GenFieldStructure()
         let AllDivs = newField.querySelectorAll('div')
-        console.log(AllDivs)
-
         AllDivs[1].querySelector('input').value = field.name
         AllDivs[1].setAttribute('data-config',JSON.stringify(field))
         AllDivs[2].setAttribute('data-config',JSON.stringify(field.propieties))
         AllDivs[2].querySelector('select').value = field.type
-        console.log(field)
-        
         Fields_Area.appendChild(newField)
     }
     
@@ -61,7 +57,7 @@ function SetModelEditView(ModelDiv){
         newA.querySelector('div').querySelectorAll('div')[0].querySelectorAll('select')[0].value = assoc.type
         newA.querySelector('div').querySelectorAll('div')[0].querySelectorAll('select')[1].value = assoc.to
         Associations.appendChild(newA)
-        console.log(newA)
+
     }
 
     Model_name.textContent = config.name
@@ -104,7 +100,6 @@ async function EditModelBtn(event) {
         divAtual = divAtual.parentElement
     }
     divAtual = divAtual.parentElement.parentElement
-    console.log(divAtual)
 
     SetModelEditView(divAtual)
 
@@ -321,12 +316,11 @@ socket.on('Atualizar',async(data)=>{
 })
 
 socket.on("remover_model",async(data)=>{
-    console.log("remover:",data)
+
     let models = document.querySelector('.ModelsList').querySelector('ul').querySelectorAll('li')
     for(let model of models) {
         let config = JSON.parse(model.querySelector("div").getAttribute("data-config"))
         if(config.name == data.name) {
-            console.log("encontrei")
             document.querySelector('.ModelsList').querySelector('ul').removeChild(model)
         }
     }

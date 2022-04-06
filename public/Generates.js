@@ -6,7 +6,7 @@ const emptyModel = {
             "name":"Id",
             "type":"INTEGER",
             "propieties":{
-                "PK":false,
+                "PK":true,
                 "NN":false,
                 "AI":true,
                 "DV":""
@@ -30,6 +30,7 @@ const selectionsHTML='<option selected>None</option>'+
 '<option value="DOUBLE">DOUBLE</option>'+
 '<option value="DECIMAL">DECIMAL</option>'+
 '<option value="DATE">DATE</option>'+
+'<option value="JSON">JSON</option>'+
 '<option value="BLOB">BLOB</option>'
 
 function AppClass(obj,List){
