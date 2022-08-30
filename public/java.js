@@ -298,7 +298,7 @@ function readTextFile()
 document.querySelector('.ID').value = Math.floor(Math.random() * 8000)
 
 function entrar_sala() {
-    let salaId = prompt("Irforme o numero da sala",`${Sala_Atual}`);
+    let salaId = prompt("Enter room number",`${Sala_Atual}`);
     socket.emit("EntrarSala",{id:salaId})
 }
 
@@ -353,7 +353,7 @@ socket.on("remover_model",(model)=>{
 
 socket.on("sala_atual",(data)=>{
     Sala_Atual = data.id;
-    document.querySelector("#salaid").textContent = `Sua sala atual é : ${Sala_Atual}`
+    document.querySelector("#salaid").textContent = `Your current room is : ${Sala_Atual}`
 })
 
 socket.on('err',async(data)=>{
