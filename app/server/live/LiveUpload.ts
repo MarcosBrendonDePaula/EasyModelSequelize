@@ -1,9 +1,6 @@
-// LiveUpload - Estado de upload chunked + sincronização UI
+// LiveUpload - Chunked upload state + UI sync (core dependency)
 
 import { LiveComponent } from '@core/types/types'
-
-// Componente Cliente (Ctrl+Click para navegar)
-import type { UploadDemo as _Client } from '@client/src/live/UploadDemo'
 
 export class LiveUpload extends LiveComponent<typeof LiveUpload.defaultState> {
   static componentName = 'LiveUpload'
@@ -25,9 +22,6 @@ export class LiveUpload extends LiveComponent<typeof LiveUpload.defaultState> {
     if (normalized.includes('..') || normalized.includes('/') || normalized.includes('\\')) {
       throw new Error('Invalid file name')
     }
-
-    // All file types allowed - no extension blocking
-    // Security note: Configure allowed extensions per your application needs
 
     this.setState({
       status: 'uploading',

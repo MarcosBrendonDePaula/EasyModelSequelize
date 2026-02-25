@@ -1,4 +1,5 @@
 // Shared types between server and client
+export * from './schema'
 export interface User {
   id: number
   name: string

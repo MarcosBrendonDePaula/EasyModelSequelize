@@ -1,92 +1,69 @@
-# EasyModelSequelize
+# EasyModel
 
-⚡ **FluxStack Application** - Modern full-stack TypeScript framework
+Collaborative ER diagram designer with multi-ORM code generation. Built with FluxStack (Bun + Elysia + React 19 + Tailwind v4).
 
-## 🚀 Getting Started
+## Getting Started
 
 ```bash
 # Start development
 bun run dev
 
-# Build for production  
+# Build for production
 bun run build
 
 # Start production server
 bun run start
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
-EasyModelSequelize/
-├── core/          # FluxStack framework (don't modify)
-├── app/           # Your application code
-│   ├── server/    # Backend API routes
-│   ├── client/    # Frontend React app
-│   └── shared/    # Shared types and utilities
+EasyModel/
+├── core/                    # FluxStack framework
+├── app/
+│   ├── server/
+│   │   ├── generators/      # 8 code generators (Sequelize, Prisma, TypeORM, Drizzle, MongoDB, SQL Raw)
+│   │   ├── diff/            # Schema diff engine for incremental migrations
+│   │   ├── validators/      # Schema validation
+│   │   ├── live/            # LiveSchemaDesigner (real-time collaboration)
+│   │   └── routes/          # API routes
+│   ├── client/
+│   │   ├── components/designer/  # Canvas, Toolbox, FieldRow, Modals
+│   │   └── pages/           # DesignerPage
+│   └── shared/
+│       └── types/           # Schema types (FieldProperties, SchemaModel, etc.)
 └── package.json
 ```
 
-## 🔥 Features
+## Supported Generators
 
-- **⚡ Bun Runtime** - 3x faster than Node.js
-- **🔒 Full Type Safety** - Eden Treaty + TypeScript
-- **🎨 Modern UI** - React 19 + Tailwind CSS v4
-- **📋 Auto Documentation** - Swagger UI generated
-- **🔄 Hot Reload** - Backend + Frontend
-- **🔌 Plugin System** - Extensible with custom plugins
+| Generator | Dialects | Migrations |
+|-----------|----------|------------|
+| **Sequelize JS** | PostgreSQL, MySQL, SQLite, MSSQL | Full incremental |
+| **Sequelize TS** | PostgreSQL, MySQL, SQLite, MSSQL | Full incremental |
+| **Prisma** | PostgreSQL, MySQL, SQLite, SQL Server, MongoDB | `prisma migrate` |
+| **TypeORM** | PostgreSQL, MySQL, SQLite, MSSQL | `typeorm migration:generate` |
+| **Drizzle** | PostgreSQL, MySQL, SQLite | `drizzle-kit generate` |
+| **MongoDB JS** | MongoDB | N/A |
+| **MongoDB TS** | MongoDB | N/A |
+| **SQL Raw** | PostgreSQL, MySQL, SQLite, MSSQL | DDL only |
 
-## 🔌 Adding Plugins
+## Features
 
-### Built-in Plugins
-FluxStack includes several built-in plugins that are ready to use:
+- Real-time collaborative editing via rooms
+- Drag-and-drop field types from toolbox
+- Visual ER diagram with associations (1:1, 1:M, M:N)
+- 24 field types with dialect-aware mappings
+- STRING/CHAR length, DECIMAL precision/scale support
+- ENUM editor with dynamic tags
+- Schema import/export (JSON)
+- Generate ZIP with full project scaffolding
+- Incremental migration history (Sequelize)
 
-```typescript
-// app/server/index.ts
-import { loggerPlugin, swaggerPlugin, staticPlugin } from "@core/server"
+## Learn More
 
-// Add built-in plugins
-app.use(loggerPlugin)
-app.use(swaggerPlugin)
-```
-
-### Custom Plugin Example
-
-```typescript
-// app/server/plugins/auth.ts
-import { Elysia } from 'elysia'
-
-export const authPlugin = new Elysia({ name: 'auth' })
-  .derive(({ headers }) => ({
-    user: getUserFromToken(headers.authorization)
-  }))
-  .guard({
-    beforeHandle({ user, set }) {
-      if (!user) {
-        set.status = 401
-        return { error: 'Unauthorized' }
-      }
-    }
-  })
-
-// Use in app/server/index.ts
-import { authPlugin } from './plugins/auth'
-app.use(authPlugin)
-```
-
-### Available Plugin Hooks
-- `setup` - Initialize plugin resources
-- `onServerStart` - Run when server starts
-- `onRequest` - Process incoming requests
-- `onResponse` - Process outgoing responses
-- `onError` - Handle errors
-
-## 📖 Learn More
-
-- **LLM Documentation**: Check `LLMD/INDEX.md` for AI-optimized docs
-- **Plugin Guide**: Check `LLMD/resources/plugins-external.md`
-- **FluxStack Docs**: Visit the [FluxStack Repository](https://github.com/MarcosBrendonDePaula/FluxStack)
+- **FluxStack Docs**: [FluxStack Repository](https://github.com/MarcosBrendonDePaula/FluxStack)
 
 ---
 
-Built with ❤️ using FluxStack
+Built with FluxStack

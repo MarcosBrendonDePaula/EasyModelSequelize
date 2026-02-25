@@ -1,46 +1,66 @@
 <svg viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="outer" x1="50%" y1="100%" x2="50%" y2="0%">
+    <linearGradient id="bg" x1="0" y1="0" x2="128" y2="128" gradientUnits="userSpaceOnUse">
       <stop stop-color="#4338CA"/>
-      <stop offset=".25" stop-color="#7C3AED"/>
-      <stop offset=".5" stop-color="#A855F7"/>
-      <stop offset=".75" stop-color="#C084FC"/>
-      <stop offset="1" stop-color="#22D3EE"/>
+      <stop offset="1" stop-color="#7C3AED"/>
     </linearGradient>
-    <linearGradient id="mid" x1="50%" y1="100%" x2="50%" y2="0%">
-      <stop stop-color="#6D28D9"/>
-      <stop offset=".3" stop-color="#A855F7"/>
-      <stop offset=".7" stop-color="#C4B5FD"/>
-      <stop offset="1" stop-color="#67E8F9"/>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#1E1B4B" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#312E81" stop-opacity=".9"/>
     </linearGradient>
-    <linearGradient id="inner" x1="50%" y1="100%" x2="50%" y2="0%">
+    <linearGradient id="link" x1="0" y1="0" x2="1" y2="1">
       <stop stop-color="#A78BFA"/>
-      <stop offset=".4" stop-color="#C4B5FD"/>
-      <stop offset=".8" stop-color="#E0E7FF"/>
-      <stop offset="1" stop-color="#ECFEFF"/>
-    </linearGradient>
-    <linearGradient id="core" x1="50%" y1="100%" x2="50%" y2="0%">
-      <stop stop-color="#DDD6FE"/>
-      <stop offset="1" stop-color="#F0F9FF"/>
+      <stop offset="1" stop-color="#22D3EE"/>
     </linearGradient>
   </defs>
 
-  <!-- Main outer flame -->
-  <path fill="url(#outer)" opacity=".92"
-    d="M64 10C62 10 54 26 50 36C46 46 36 48 34 60C32 72 35 82 40 90C46 98 54 106 64 108C74 106 82 98 88 90C93 82 96 72 94 60C92 48 82 46 78 36C74 26 84 20 86 14C82 22 76 30 74 38C72 48 78 56 76 64C74 54 70 40 68 30C66 20 64 10 64 10Z"/>
+  <!-- Background rounded square -->
+  <rect width="128" height="128" rx="28" fill="url(#bg)"/>
 
-  <!-- Middle flame -->
-  <path fill="url(#mid)" opacity=".88"
-    d="M64 30C62 30 52 46 48 56C44 66 46 78 50 86C54 94 58 100 64 102C70 100 74 94 78 86C82 78 84 66 80 56C78 48 82 38 82 30C80 38 76 46 74 54C72 44 68 36 64 30Z"/>
+  <!-- Connection lines between tables -->
+  <line x1="56" y1="48" x2="72" y2="48" stroke="url(#link)" stroke-width="3" stroke-linecap="round"/>
+  <line x1="56" y1="84" x2="72" y2="84" stroke="url(#link)" stroke-width="3" stroke-linecap="round"/>
+  <line x1="42" y1="64" x2="42" y2="72" stroke="url(#link)" stroke-width="3" stroke-linecap="round"/>
+  <line x1="86" y1="64" x2="86" y2="72" stroke="url(#link)" stroke-width="3" stroke-linecap="round"/>
 
-  <!-- Inner flame -->
-  <path fill="url(#inner)" opacity=".85"
-    d="M64 50C60 56 54 66 54 76C54 86 58 94 64 100C70 94 74 86 74 76C74 66 68 56 64 50Z"/>
+  <!-- Table top-left -->
+  <rect x="16" y="26" width="40" height="38" rx="6" fill="url(#card)" stroke="#A78BFA" stroke-width="2"/>
+  <rect x="16" y="26" width="40" height="12" rx="6" fill="#6D28D9"/>
+  <rect x="16" y="32" width="40" height="6" fill="#6D28D9"/>
+  <rect x="22" y="44" width="20" height="3" rx="1.5" fill="#818CF8" opacity=".6"/>
+  <rect x="22" y="51" width="14" height="3" rx="1.5" fill="#818CF8" opacity=".4"/>
+  <circle cx="44" y="45.5" r="2" fill="#22D3EE" cy="45.5"/>
 
-  <!-- Hot core -->
-  <path fill="url(#core)" opacity=".7"
-    d="M64 72C60 78 56 84 58 92C60 97 62 100 64 101C66 100 68 97 70 92C72 84 68 78 64 72Z"/>
+  <!-- Table top-right -->
+  <rect x="72" y="26" width="40" height="38" rx="6" fill="url(#card)" stroke="#A78BFA" stroke-width="2"/>
+  <rect x="72" y="26" width="40" height="12" rx="6" fill="#6D28D9"/>
+  <rect x="72" y="32" width="40" height="6" fill="#6D28D9"/>
+  <rect x="78" y="44" width="20" height="3" rx="1.5" fill="#818CF8" opacity=".6"/>
+  <rect x="78" y="51" width="14" height="3" rx="1.5" fill="#818CF8" opacity=".4"/>
+  <circle cx="100" cy="45.5" r="2" fill="#22D3EE"/>
 
-  <!-- White hot center -->
-  <ellipse cx="64" cy="92" rx="5" ry="7" fill="#F0F9FF" opacity=".5"/>
+  <!-- Table bottom-left -->
+  <rect x="16" y="72" width="40" height="32" rx="6" fill="url(#card)" stroke="#A78BFA" stroke-width="2"/>
+  <rect x="16" y="72" width="40" height="12" rx="6" fill="#6D28D9"/>
+  <rect x="16" y="78" width="40" height="6" fill="#6D28D9"/>
+  <rect x="22" y="90" width="20" height="3" rx="1.5" fill="#818CF8" opacity=".6"/>
+
+  <!-- Table bottom-right -->
+  <rect x="72" y="72" width="40" height="32" rx="6" fill="url(#card)" stroke="#A78BFA" stroke-width="2"/>
+  <rect x="72" y="72" width="40" height="12" rx="6" fill="#6D28D9"/>
+  <rect x="72" y="78" width="40" height="6" fill="#6D28D9"/>
+  <rect x="78" y="90" width="20" height="3" rx="1.5" fill="#818CF8" opacity=".6"/>
+
+  <!-- Connection dots (endpoints) -->
+  <circle cx="56" cy="48" r="3" fill="#22D3EE"/>
+  <circle cx="72" cy="48" r="3" fill="#22D3EE"/>
+  <circle cx="56" cy="84" r="3" fill="#22D3EE"/>
+  <circle cx="72" cy="84" r="3" fill="#22D3EE"/>
+  <circle cx="42" cy="64" r="3" fill="#22D3EE"/>
+  <circle cx="42" cy="72" r="3" fill="#22D3EE"/>
+  <circle cx="86" cy="64" r="3" fill="#22D3EE"/>
+  <circle cx="86" cy="72" r="3" fill="#22D3EE"/>
+
+  <!-- "EM" text hint (subtle) -->
+  <text x="64" y="19" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="14" fill="#C4B5FD" opacity=".7">EM</text>
 </svg>

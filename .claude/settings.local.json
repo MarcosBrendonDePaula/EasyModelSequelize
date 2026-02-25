@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tree:*)",
+      "Bash(npx tsc:*)",
+      "Bash(bunx tsc:*)",
+      "Bash(bun add:*)",
+      "Bash(cat:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

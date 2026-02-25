@@ -1,0 +1,257 @@
+{
+  "id": "sample-blog-db",
+  "name": "BlogPlatform",
+  "models": [
+    {
+      "id": "m-user",
+      "name": "User",
+      "color": "hsl(220, 60%, 45%)",
+      "position": { "x": 50, "y": 50 },
+      "fields": [
+        { "id": "f-user-id", "name": "id", "type": "INTEGER", "properties": { "primaryKey": true, "allowNull": false, "autoIncrement": true, "unique": true, "defaultValue": "" } },
+        { "id": "f-user-name", "name": "name", "type": "STRING", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": false, "defaultValue": "" } },
+        { "id": "f-user-email", "name": "email", "type": "STRING", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": true, "defaultValue": "" } },
+        { "id": "f-user-password", "name": "password", "type": "STRING", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": false, "defaultValue": "" } },
+        { "id": "f-user-role", "name": "role", "type": "ENUM", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": false, "defaultValue": "user" } },
+        { "id": "f-user-active", "name": "active", "type": "BOOLEAN", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": false, "defaultValue": "true" } },
+        { "id": "f-user-bio", "name": "bio", "type": "TEXT", "properties": { "primaryKey": false, "allowNull": true, "autoIncrement": false, "unique": false, "defaultValue": "" } },
+        { "id": "f-user-lastLogin", "name": "lastLogin", "type": "DATE", "properties": { "primaryKey": false, "allowNull": true, "autoIncrement": false, "unique": false, "defaultValue": "" } }
+      ],
+      "associations": [
+        { "id": "a-user-profile", "type": "1:1", "targetModelId": "m-profile" },
+        { "id": "a-user-posts", "type": "1:M", "targetModelId": "m-post" },
+        { "id": "a-user-comments", "type": "1:M", "targetModelId": "m-comment" }
+      ]
+    },
+    {
+      "id": "m-profile",
+      "name": "Profile",
+      "color": "hsl(180, 60%, 45%)",
+      "position": { "x": 400, "y": 50 },
+      "fields": [
+        { "id": "f-prof-id", "name": "id", "type": "INTEGER", "properties": { "primaryKey": true, "allowNull": false, "autoIncrement": true, "unique": true, "defaultValue": "" } },
+        { "id": "f-prof-avatar", "name": "avatarUrl", "type": "STRING", "properties": { "primaryKey": false, "allowNull": true, "autoIncrement": false, "unique": false, "defaultValue": "" } },
+        { "id": "f-prof-website", "name": "website", "type": "STRING", "properties": { "primaryKey": false, "allowNull": true, "autoIncrement": false, "unique": false, "defaultValue": "" } },
+        { "id": "f-prof-location", "name": "location", "type": "STRING", "properties": { "primaryKey": false, "allowNull": true, "autoIncrement": false, "unique": false, "defaultValue": "" } },
+        { "id": "f-prof-birthdate", "name": "birthDate", "type": "DATEONLY", "properties": { "primaryKey": false, "allowNull": true, "autoIncrement": false, "unique": false, "defaultValue": "" } },
+        { "id": "f-prof-settings", "name": "settings", "type": "JSONB", "properties": { "primaryKey": false, "allowNull": true, "autoIncrement": false, "unique": false, "defaultValue": "" } }
+      ],
+      "associations": []
+    },
+    {
+      "id": "m-post",
+      "name": "Post",
+      "color": "hsl(30, 60%, 45%)",
+      "position": { "x": 50, "y": 350 },
+      "fields": [
+        { "id": "f-post-id", "name": "id", "type": "INTEGER", "properties": { "primaryKey": true, "allowNull": false, "autoIncrement": true, "unique": true, "defaultValue": "" } },
+        { "id": "f-post-title", "name": "title", "type": "STRING", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": false, "defaultValue": "" } },
+        { "id": "f-post-slug", "name": "slug", "type": "STRING", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": true, "defaultValue": "" } },
+        { "id": "f-post-content", "name": "content", "type": "TEXT", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": false, "defaultValue": "" } },
+        { "id": "f-post-excerpt", "name": "excerpt", "type": "TEXT", "properties": { "primaryKey": false, "allowNull": true, "autoIncrement": false, "unique": false, "defaultValue": "" } },
+        { "id": "f-post-published", "name": "published", "type": "BOOLEAN", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": false, "defaultValue": "false" } },
+        { "id": "f-post-views", "name": "viewCount", "type": "INTEGER", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": false, "defaultValue": "0" } },
+        { "id": "f-post-publishedAt", "name": "publishedAt", "type": "DATE", "properties": { "primaryKey": false, "allowNull": true, "autoIncrement": false, "unique": false, "defaultValue": "" } },
+        { "id": "f-post-meta", "name": "metadata", "type": "JSONB", "properties": { "primaryKey": false, "allowNull": true, "autoIncrement": false, "unique": false, "defaultValue": "" } }
+      ],
+      "associations": [
+        { "id": "a-post-comments", "type": "1:M", "targetModelId": "m-comment" }
+      ]
+    },
+    {
+      "id": "m-comment",
+      "name": "Comment",
+      "color": "hsl(60, 60%, 40%)",
+      "position": { "x": 400, "y": 350 },
+      "fields": [
+        { "id": "f-com-id", "name": "id", "type": "INTEGER", "properties": { "primaryKey": true, "allowNull": false, "autoIncrement": true, "unique": true, "defaultValue": "" } },
+        { "id": "f-com-body", "name": "body", "type": "TEXT", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": false, "defaultValue": "" } },
+        { "id": "f-com-approved", "name": "approved", "type": "BOOLEAN", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": false, "defaultValue": "false" } },
+        { "id": "f-com-likes", "name": "likes", "type": "INTEGER", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": false, "defaultValue": "0" } }
+      ],
+      "associations": []
+    },
+    {
+      "id": "m-category",
+      "name": "Category",
+      "color": "hsl(300, 60%, 45%)",
+      "position": { "x": 50, "y": 650 },
+      "fields": [
+        { "id": "f-cat-id", "name": "id", "type": "INTEGER", "properties": { "primaryKey": true, "allowNull": false, "autoIncrement": true, "unique": true, "defaultValue": "" } },
+        { "id": "f-cat-name", "name": "name", "type": "STRING", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": true, "defaultValue": "" } },
+        { "id": "f-cat-slug", "name": "slug", "type": "STRING", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": true, "defaultValue": "" } },
+        { "id": "f-cat-description", "name": "description", "type": "TEXT", "properties": { "primaryKey": false, "allowNull": true, "autoIncrement": false, "unique": false, "defaultValue": "" } },
+        { "id": "f-cat-color", "name": "color", "type": "STRING", "properties": { "primaryKey": false, "allowNull": true, "autoIncrement": false, "unique": false, "defaultValue": "#6366f1" } }
+      ],
+      "associations": [
+        { "id": "a-cat-posts", "type": "M:N", "targetModelId": "m-post" }
+      ]
+    },
+    {
+      "id": "m-tag",
+      "name": "Tag",
+      "color": "hsl(120, 60%, 40%)",
+      "position": { "x": 400, "y": 650 },
+      "fields": [
+        { "id": "f-tag-id", "name": "id", "type": "INTEGER", "properties": { "primaryKey": true, "allowNull": false, "autoIncrement": true, "unique": true, "defaultValue": "" } },
+        { "id": "f-tag-name", "name": "name", "type": "STRING", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": true, "defaultValue": "" } },
+        { "id": "f-tag-slug", "name": "slug", "type": "STRING", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": true, "defaultValue": "" } }
+      ],
+      "associations": [
+        { "id": "a-tag-posts", "type": "M:N", "targetModelId": "m-post" }
+      ]
+    }
+  ],
+  "migrations": [
+    {
+      "id": "mig-001",
+      "timestamp": 1738368000000,
+      "description": "Create table User, Add column id to User, Add column name to User, Add column email to User (+1 more)",
+      "ops": [
+        { "type": "createTable", "table": "user" },
+        { "type": "addColumn", "table": "user", "column": "id", "field": { "id": "f-user-id", "name": "id", "type": "INTEGER", "properties": { "primaryKey": true, "allowNull": false, "autoIncrement": true, "unique": true, "defaultValue": "" } } },
+        { "type": "addColumn", "table": "user", "column": "name", "field": { "id": "f-user-name", "name": "name", "type": "STRING", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": false, "defaultValue": "" } } },
+        { "type": "addColumn", "table": "user", "column": "email", "field": { "id": "f-user-email", "name": "email", "type": "STRING", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": true, "defaultValue": "" } } },
+        { "type": "addColumn", "table": "user", "column": "password", "field": { "id": "f-user-password", "name": "password", "type": "STRING", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": false, "defaultValue": "" } } }
+      ],
+      "snapshotHash": "a1b2c3"
+    },
+    {
+      "id": "mig-002",
+      "timestamp": 1738454400000,
+      "description": "Create table Post, Add column id to Post, Add column title to Post (+2 more)",
+      "ops": [
+        { "type": "createTable", "table": "post" },
+        { "type": "addColumn", "table": "post", "column": "id", "field": { "id": "f-post-id", "name": "id", "type": "INTEGER", "properties": { "primaryKey": true, "allowNull": false, "autoIncrement": true, "unique": true, "defaultValue": "" } } },
+        { "type": "addColumn", "table": "post", "column": "title", "field": { "id": "f-post-title", "name": "title", "type": "STRING", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": false, "defaultValue": "" } } },
+        { "type": "addColumn", "table": "post", "column": "slug", "field": { "id": "f-post-slug", "name": "slug", "type": "STRING", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": true, "defaultValue": "" } } },
+        { "type": "addColumn", "table": "post", "column": "content", "field": { "id": "f-post-content", "name": "content", "type": "TEXT", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": false, "defaultValue": "" } } }
+      ],
+      "snapshotHash": "d4e5f6"
+    },
+    {
+      "id": "mig-003",
+      "timestamp": 1738540800000,
+      "description": "Add column role to User, Add column active to User",
+      "ops": [
+        { "type": "addColumn", "table": "user", "column": "role", "field": { "id": "f-user-role", "name": "role", "type": "ENUM", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": false, "defaultValue": "user" } } },
+        { "type": "addColumn", "table": "user", "column": "active", "field": { "id": "f-user-active", "name": "active", "type": "BOOLEAN", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": false, "defaultValue": "true" } } }
+      ],
+      "snapshotHash": "g7h8i9"
+    },
+    {
+      "id": "mig-004",
+      "timestamp": 1738627200000,
+      "description": "Add column published to Post, Add column viewCount to Post, Add column publishedAt to Post",
+      "ops": [
+        { "type": "addColumn", "table": "post", "column": "published", "field": { "id": "f-post-published", "name": "published", "type": "BOOLEAN", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": false, "defaultValue": "false" } } },
+        { "type": "addColumn", "table": "post", "column": "view_count", "field": { "id": "f-post-views", "name": "viewCount", "type": "INTEGER", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": false, "defaultValue": "0" } } },
+        { "type": "addColumn", "table": "post", "column": "published_at", "field": { "id": "f-post-publishedAt", "name": "publishedAt", "type": "DATE", "properties": { "primaryKey": false, "allowNull": true, "autoIncrement": false, "unique": false, "defaultValue": "" } } }
+      ],
+      "snapshotHash": "j1k2l3"
+    },
+    {
+      "id": "mig-005",
+      "timestamp": 1738713600000,
+      "description": "Create table Profile, Add column id to Profile, Add column avatarUrl to Profile (+3 more)",
+      "ops": [
+        { "type": "createTable", "table": "profile" },
+        { "type": "addColumn", "table": "profile", "column": "id", "field": { "id": "f-prof-id", "name": "id", "type": "INTEGER", "properties": { "primaryKey": true, "allowNull": false, "autoIncrement": true, "unique": true, "defaultValue": "" } } },
+        { "type": "addColumn", "table": "profile", "column": "avatar_url", "field": { "id": "f-prof-avatar", "name": "avatarUrl", "type": "STRING", "properties": { "primaryKey": false, "allowNull": true, "autoIncrement": false, "unique": false, "defaultValue": "" } } },
+        { "type": "addColumn", "table": "profile", "column": "website", "field": { "id": "f-prof-website", "name": "website", "type": "STRING", "properties": { "primaryKey": false, "allowNull": true, "autoIncrement": false, "unique": false, "defaultValue": "" } } },
+        { "type": "addColumn", "table": "profile", "column": "location", "field": { "id": "f-prof-location", "name": "location", "type": "STRING", "properties": { "primaryKey": false, "allowNull": true, "autoIncrement": false, "unique": false, "defaultValue": "" } } },
+        { "type": "addColumn", "table": "profile", "column": "birth_date", "field": { "id": "f-prof-birthdate", "name": "birthDate", "type": "DATEONLY", "properties": { "primaryKey": false, "allowNull": true, "autoIncrement": false, "unique": false, "defaultValue": "" } } },
+        { "type": "addColumn", "table": "profile", "column": "settings", "field": { "id": "f-prof-settings", "name": "settings", "type": "JSONB", "properties": { "primaryKey": false, "allowNull": true, "autoIncrement": false, "unique": false, "defaultValue": "" } } },
+        { "type": "addColumn", "table": "profile", "column": "user_id", "reference": { "model": "user", "key": "id", "onUpdate": "CASCADE", "onDelete": "SET NULL" } }
+      ],
+      "snapshotHash": "m4n5o6"
+    },
+    {
+      "id": "mig-006",
+      "timestamp": 1738800000000,
+      "description": "Create table Comment, Add column id to Comment, Add column body to Comment (+2 more)",
+      "ops": [
+        { "type": "createTable", "table": "comment" },
+        { "type": "addColumn", "table": "comment", "column": "id", "field": { "id": "f-com-id", "name": "id", "type": "INTEGER", "properties": { "primaryKey": true, "allowNull": false, "autoIncrement": true, "unique": true, "defaultValue": "" } } },
+        { "type": "addColumn", "table": "comment", "column": "body", "field": { "id": "f-com-body", "name": "body", "type": "TEXT", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": false, "defaultValue": "" } } },
+        { "type": "addColumn", "table": "comment", "column": "approved", "field": { "id": "f-com-approved", "name": "approved", "type": "BOOLEAN", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": false, "defaultValue": "false" } } },
+        { "type": "addColumn", "table": "comment", "column": "likes", "field": { "id": "f-com-likes", "name": "likes", "type": "INTEGER", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": false, "defaultValue": "0" } } },
+        { "type": "addColumn", "table": "comment", "column": "user_id", "reference": { "model": "user", "key": "id", "onUpdate": "CASCADE", "onDelete": "CASCADE" } },
+        { "type": "addColumn", "table": "comment", "column": "post_id", "reference": { "model": "post", "key": "id", "onUpdate": "CASCADE", "onDelete": "CASCADE" } }
+      ],
+      "snapshotHash": "p7q8r9"
+    },
+    {
+      "id": "mig-007",
+      "timestamp": 1738886400000,
+      "description": "Add column bio to User, Add column lastLogin to User",
+      "ops": [
+        { "type": "addColumn", "table": "user", "column": "bio", "field": { "id": "f-user-bio", "name": "bio", "type": "TEXT", "properties": { "primaryKey": false, "allowNull": true, "autoIncrement": false, "unique": false, "defaultValue": "" } } },
+        { "type": "addColumn", "table": "user", "column": "last_login", "field": { "id": "f-user-lastLogin", "name": "lastLogin", "type": "DATE", "properties": { "primaryKey": false, "allowNull": true, "autoIncrement": false, "unique": false, "defaultValue": "" } } }
+      ],
+      "snapshotHash": "s1t2u3"
+    },
+    {
+      "id": "mig-008",
+      "timestamp": 1738972800000,
+      "description": "Add column excerpt to Post, Add column metadata to Post",
+      "ops": [
+        { "type": "addColumn", "table": "post", "column": "excerpt", "field": { "id": "f-post-excerpt", "name": "excerpt", "type": "TEXT", "properties": { "primaryKey": false, "allowNull": true, "autoIncrement": false, "unique": false, "defaultValue": "" } } },
+        { "type": "addColumn", "table": "post", "column": "metadata", "field": { "id": "f-post-meta", "name": "metadata", "type": "JSONB", "properties": { "primaryKey": false, "allowNull": true, "autoIncrement": false, "unique": false, "defaultValue": "" } } }
+      ],
+      "snapshotHash": "v4w5x6"
+    },
+    {
+      "id": "mig-009",
+      "timestamp": 1739059200000,
+      "description": "Create table Category, Add column id to Category, Add column name to Category (+2 more)",
+      "ops": [
+        { "type": "createTable", "table": "category" },
+        { "type": "addColumn", "table": "category", "column": "id", "field": { "id": "f-cat-id", "name": "id", "type": "INTEGER", "properties": { "primaryKey": true, "allowNull": false, "autoIncrement": true, "unique": true, "defaultValue": "" } } },
+        { "type": "addColumn", "table": "category", "column": "name", "field": { "id": "f-cat-name", "name": "name", "type": "STRING", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": true, "defaultValue": "" } } },
+        { "type": "addColumn", "table": "category", "column": "slug", "field": { "id": "f-cat-slug", "name": "slug", "type": "STRING", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": true, "defaultValue": "" } } },
+        { "type": "addColumn", "table": "category", "column": "description", "field": { "id": "f-cat-description", "name": "description", "type": "TEXT", "properties": { "primaryKey": false, "allowNull": true, "autoIncrement": false, "unique": false, "defaultValue": "" } } },
+        { "type": "addColumn", "table": "category", "column": "color", "field": { "id": "f-cat-color", "name": "color", "type": "STRING", "properties": { "primaryKey": false, "allowNull": true, "autoIncrement": false, "unique": false, "defaultValue": "#6366f1" } } }
+      ],
+      "snapshotHash": "y7z8a1"
+    },
+    {
+      "id": "mig-010",
+      "timestamp": 1739145600000,
+      "description": "Create table Tag, Add column id to Tag, Add column name to Tag, Add column slug to Tag",
+      "ops": [
+        { "type": "createTable", "table": "tag" },
+        { "type": "addColumn", "table": "tag", "column": "id", "field": { "id": "f-tag-id", "name": "id", "type": "INTEGER", "properties": { "primaryKey": true, "allowNull": false, "autoIncrement": true, "unique": true, "defaultValue": "" } } },
+        { "type": "addColumn", "table": "tag", "column": "name", "field": { "id": "f-tag-name", "name": "name", "type": "STRING", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": true, "defaultValue": "" } } },
+        { "type": "addColumn", "table": "tag", "column": "slug", "field": { "id": "f-tag-slug", "name": "slug", "type": "STRING", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": true, "defaultValue": "" } } }
+      ],
+      "snapshotHash": "b2c3d4"
+    },
+    {
+      "id": "mig-011",
+      "timestamp": 1739232000000,
+      "description": "Change column email in User",
+      "ops": [
+        {
+          "type": "changeColumn",
+          "table": "user",
+          "column": "email",
+          "field": { "id": "f-user-email", "name": "email", "type": "STRING", "properties": { "primaryKey": false, "allowNull": false, "autoIncrement": false, "unique": true, "defaultValue": "" } },
+          "previousField": { "id": "f-user-email", "name": "email", "type": "STRING", "properties": { "primaryKey": false, "allowNull": true, "autoIncrement": false, "unique": false, "defaultValue": "" } }
+        }
+      ],
+      "snapshotHash": "e5f6g7"
+    },
+    {
+      "id": "mig-012",
+      "timestamp": 1739318400000,
+      "description": "Add FK user_id to Post",
+      "ops": [
+        { "type": "addColumn", "table": "post", "column": "user_id", "reference": { "model": "user", "key": "id", "onUpdate": "CASCADE", "onDelete": "CASCADE" } }
+      ],
+      "snapshotHash": "h8i9j1"
+    }
+  ],
+  "createdAt": 1738368000000,
+  "updatedAt": 1739318400000
+}
