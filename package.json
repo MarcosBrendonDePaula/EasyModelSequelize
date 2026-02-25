@@ -1,19 +1,95 @@
 {
-  "name": "creator",
+  "name": "EasyModelSequelize",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+  "description": "EasyModelSequelize - FluxStack application",
+  "keywords": [
+    "framework",
+    "full-stack",
+    "typescript",
+    "elysia",
+    "react",
+    "bun",
+    "vite"
+  ],
+  "author": "FluxStack Team",
+  "license": "MIT",
+  "homepage": "https://github.com/MarcosBrendonDePaula/FluxStack",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarcosBrendonDePaula/FluxStack.git"
   },
-  "author": "",
-  "license": "ISC",
+  "module": "app/server/index.ts",
+  "type": "module",
+  "bin": {
+    "create-fluxstack": "create-fluxstack.ts"
+  },
+  "scripts": {
+    "dev": "bun run core/cli/index.ts dev",
+    "dev:frontend": "bun run core/cli/index.ts dev --frontend-only",
+    "dev:backend": "bun run core/cli/index.ts dev --backend-only",
+    "build": "cross-env NODE_ENV=production bun run core/cli/index.ts build",
+    "build:frontend": "cross-env NODE_ENV=production bun run core/cli/index.ts build --frontend-only",
+    "build:backend": "cross-env NODE_ENV=production bun run core/cli/index.ts build --backend-only",
+    "build:exe": "cross-env NODE_ENV=production && bun run core/cli/index.ts build && bun run core/cli/index.ts build:exe",
+    "start": "NODE_ENV=production bun dist/index.js",
+    "create": "bun run core/cli/index.ts create",
+    "cli": "bun run core/cli/index.ts",
+    "make:component": "bun run core/cli/index.ts make:component",
+    "sync-version": "bun run core/utils/sync-version.ts",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage",
+    "typecheck:api": "tsc --noEmit -p tsconfig.api-strict.json"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.30.1",
+    "@noble/curves": "1.2.0",
+    "@noble/hashes": "1.3.2",
+    "@tailwindcss/vite": "^4.1.13",
+    "@testing-library/jest-dom": "^6.6.4",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/bun": "latest",
+    "@types/node": "^24.5.2",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitest/coverage-v8": "^3.2.4",
+    "@vitest/ui": "^3.2.4",
+    "cross-env": "^10.1.0",
+    "eslint": "^9.30.1",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.3.0",
+    "jsdom": "^26.1.0",
+    "rollup": "4.20.0",
+    "tailwindcss": "^4.1.13",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.35.1",
+    "vite-plugin-checker": "^0.12.0",
+    "vite-tsconfig-paths": "^6.0.5",
+    "vitest": "^3.2.4"
+  },
   "dependencies": {
-    "archiver": "^5.2.0",
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1",
-    "rimraf": "^3.0.2",
-    "socket.io": "^3.1.0"
-  }
+    "@elysiajs/eden": "^1.3.2",
+    "@elysiajs/swagger": "^1.3.1",
+    "@vitejs/plugin-react": "^4.6.0",
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "elysia": "^1.4.6",
+    "lightningcss": "^1.30.1",
+    "ora": "^8.1.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-icons": "^5.5.0",
+    "react-router": "^7.9.3",
+    "uuid": "^13.0.0",
+    "vite": "^7.1.7",
+    "winston": "^3.18.3",
+    "winston-daily-rotate-file": "^5.0.0",
+    "zustand": "^5.0.8"
+  },
+  "engines": {
+    "bun": ">=1.2.0"
+  },
+  "preferredPackageManager": "bun"
 }

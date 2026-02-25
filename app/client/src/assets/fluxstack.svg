@@ -1,0 +1,183 @@
+<svg viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="outer" x1="50%" y1="100%" x2="50%" y2="0%">
+      <stop stop-color="#4338CA"/>
+      <stop offset=".25" stop-color="#7C3AED"/>
+      <stop offset=".5" stop-color="#A855F7"/>
+      <stop offset=".75" stop-color="#C084FC"/>
+      <stop offset="1" stop-color="#22D3EE"/>
+    </linearGradient>
+    <linearGradient id="mid" x1="50%" y1="100%" x2="50%" y2="0%">
+      <stop stop-color="#6D28D9"/>
+      <stop offset=".3" stop-color="#A855F7"/>
+      <stop offset=".7" stop-color="#C4B5FD"/>
+      <stop offset="1" stop-color="#67E8F9"/>
+    </linearGradient>
+    <linearGradient id="inner" x1="50%" y1="100%" x2="50%" y2="0%">
+      <stop stop-color="#A78BFA"/>
+      <stop offset=".4" stop-color="#C4B5FD"/>
+      <stop offset=".8" stop-color="#E0E7FF"/>
+      <stop offset="1" stop-color="#ECFEFF"/>
+    </linearGradient>
+    <linearGradient id="core" x1="50%" y1="100%" x2="50%" y2="0%">
+      <stop stop-color="#DDD6FE"/>
+      <stop offset="1" stop-color="#F0F9FF"/>
+    </linearGradient>
+    <linearGradient id="tongue" x1="50%" y1="100%" x2="50%" y2="0%">
+      <stop stop-color="#7C3AED"/>
+      <stop offset="1" stop-color="#38BDF8"/>
+    </linearGradient>
+    <linearGradient id="spark" x1="50%" y1="100%" x2="50%" y2="0%">
+      <stop stop-color="#A78BFA"/>
+      <stop offset="1" stop-color="#67E8F9"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ============ OUTER GLOW / HEAT HAZE ============ -->
+  <ellipse cx="64" cy="60" rx="38" ry="50" fill="#7C3AED" opacity=".04">
+    <animate attributeName="rx" dur="2s" repeatCount="indefinite" values="38;42;36;38"/>
+    <animate attributeName="opacity" dur="2s" repeatCount="indefinite" values=".04;.06;.03;.04"/>
+  </ellipse>
+
+  <!-- ============ LEFT TONGUE (far) ============ -->
+  <path fill="url(#tongue)" opacity=".5">
+    <animate attributeName="d" dur="0.6s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"
+      values="
+        M44 74C40 62 36 52 38 38C39 30 43 24 43 24C44 34 45 44 48 52C50 60 43 68 44 74Z;
+        M42 74C38 64 33 54 36 36C37 28 41 22 41 22C43 32 43 46 46 54C48 62 41 69 42 74Z;
+        M45 74C41 60 38 50 40 40C41 32 44 26 44 26C45 36 46 42 49 50C51 58 44 67 45 74Z;
+        M44 74C40 62 36 52 38 38C39 30 43 24 43 24C44 34 45 44 48 52C50 60 43 68 44 74Z"/>
+    <animate attributeName="opacity" dur="0.7s" repeatCount="indefinite" values=".5;.3;.6;.4;.5"/>
+  </path>
+
+  <!-- ============ RIGHT TONGUE (far) ============ -->
+  <path fill="url(#tongue)" opacity=".45">
+    <animate attributeName="d" dur="0.7s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"
+      values="
+        M84 72C88 58 92 46 89 30C88 22 84 16 84 16C85 28 83 40 81 50C79 58 83 66 84 72Z;
+        M86 72C90 56 94 44 91 28C90 20 86 14 86 14C87 26 84 38 82 48C80 56 85 65 86 72Z;
+        M83 72C87 60 90 48 87 32C86 24 83 18 83 18C84 30 82 42 80 52C78 60 82 67 83 72Z;
+        M84 72C88 58 92 46 89 30C88 22 84 16 84 16C85 28 83 40 81 50C79 58 83 66 84 72Z"/>
+    <animate attributeName="opacity" dur="0.8s" repeatCount="indefinite" values=".45;.6;.3;.5;.45"/>
+  </path>
+
+  <!-- ============ LEFT WISP (small) ============ -->
+  <path fill="url(#tongue)" opacity=".35">
+    <animate attributeName="d" dur="0.5s" repeatCount="indefinite"
+      values="
+        M38 80C35 72 32 64 34 54C35 48 38 44 38 44C38 50 40 58 41 64C42 70 37 76 38 80Z;
+        M36 80C33 74 30 66 33 52C34 46 36 42 36 42C37 48 38 60 40 66C41 72 35 77 36 80Z;
+        M39 80C36 71 34 62 36 56C37 50 39 46 39 46C39 52 41 56 42 62C43 68 38 75 39 80Z;
+        M38 80C35 72 32 64 34 54C35 48 38 44 38 44C38 50 40 58 41 64C42 70 37 76 38 80Z"/>
+  </path>
+
+  <!-- ============ RIGHT WISP (small) ============ -->
+  <path fill="url(#tongue)" opacity=".3">
+    <animate attributeName="d" dur="0.55s" repeatCount="indefinite"
+      values="
+        M90 78C93 70 96 60 93 50C92 44 89 40 89 40C90 48 88 56 87 62C86 68 89 74 90 78Z;
+        M92 78C95 68 97 58 95 48C94 42 91 38 91 38C92 46 89 54 88 60C87 66 91 73 92 78Z;
+        M89 78C92 72 94 62 92 52C91 46 88 42 88 42C89 50 87 58 86 64C85 70 88 75 89 78Z;
+        M90 78C93 70 96 60 93 50C92 44 89 40 89 40C90 48 88 56 87 62C86 68 89 74 90 78Z"/>
+  </path>
+
+  <!-- ============ MAIN OUTER FLAME ============ -->
+  <path fill="url(#outer)" opacity=".92">
+    <animate attributeName="d" dur="1.2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"
+      values="
+        M64 10C62 10 54 26 50 36C46 46 36 48 34 60C32 72 35 82 40 90C46 98 54 106 64 108C74 106 82 98 88 90C93 82 96 72 94 60C92 48 82 46 78 36C74 26 84 20 86 14C82 22 76 30 74 38C72 48 78 56 76 64C74 54 70 40 68 30C66 20 64 10 64 10Z;
+        M64 8C62 8 52 24 48 35C44 46 34 50 32 62C30 74 34 84 38 92C44 100 53 107 64 109C75 107 84 100 90 92C94 84 98 74 96 62C94 50 84 44 80 35C76 24 86 18 88 12C84 20 78 28 76 36C74 46 80 54 78 62C76 52 72 38 70 28C68 18 64 8 64 8Z;
+        M64 12C62 12 56 28 52 37C48 46 38 46 36 58C34 70 36 80 41 88C46 96 55 105 64 107C73 105 82 96 87 88C92 80 94 70 92 58C90 46 80 48 76 37C72 28 82 22 84 16C80 24 74 32 72 40C70 50 76 58 74 66C72 56 68 42 66 32C64 24 64 12 64 12Z;
+        M64 9C62 9 53 25 49 34C45 44 35 49 33 61C31 73 34 83 39 91C45 99 53 106 64 108C75 106 83 99 89 91C94 83 97 73 95 61C93 49 83 45 79 34C75 25 85 19 87 13C83 21 77 29 75 37C73 47 79 55 77 63C75 53 71 39 69 29C67 19 64 9 64 9Z;
+        M64 10C62 10 54 26 50 36C46 46 36 48 34 60C32 72 35 82 40 90C46 98 54 106 64 108C74 106 82 98 88 90C93 82 96 72 94 60C92 48 82 46 78 36C74 26 84 20 86 14C82 22 76 30 74 38C72 48 78 56 76 64C74 54 70 40 68 30C66 20 64 10 64 10Z"/>
+  </path>
+
+  <!-- ============ MIDDLE FLAME ============ -->
+  <path fill="url(#mid)" opacity=".88">
+    <animate attributeName="d" dur="0.9s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"
+      values="
+        M64 30C62 30 52 46 48 56C44 66 46 78 50 86C54 94 58 100 64 102C70 100 74 94 78 86C82 78 84 66 80 56C78 48 82 38 82 30C80 38 76 46 74 54C72 44 68 36 64 30Z;
+        M64 28C62 28 50 44 46 55C42 66 45 80 49 88C53 96 57 101 64 103C71 101 75 96 79 88C83 80 86 66 82 55C80 46 84 36 84 28C82 36 77 44 75 52C73 42 69 34 64 28Z;
+        M64 32C62 32 53 48 49 57C45 67 47 77 51 85C55 93 59 99 64 101C69 99 73 93 77 85C81 77 83 67 79 57C77 50 81 40 81 32C79 40 75 48 73 55C71 46 67 38 64 32Z;
+        M64 29C62 29 51 45 47 54C43 64 46 79 50 87C54 95 58 100 64 102C70 100 74 95 78 87C82 79 85 64 81 54C79 47 83 37 83 29C81 37 76 45 74 53C72 43 68 35 64 29Z;
+        M64 30C62 30 52 46 48 56C44 66 46 78 50 86C54 94 58 100 64 102C70 100 74 94 78 86C82 78 84 66 80 56C78 48 82 38 82 30C80 38 76 46 74 54C72 44 68 36 64 30Z"/>
+  </path>
+
+  <!-- ============ INNER FLAME ============ -->
+  <path fill="url(#inner)" opacity=".85">
+    <animate attributeName="d" dur="0.7s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"
+      values="
+        M64 50C60 56 54 66 54 76C54 86 58 94 64 100C70 94 74 86 74 76C74 66 68 56 64 50Z;
+        M64 48C60 54 52 64 52 75C52 86 57 95 64 101C71 95 76 86 76 75C76 64 68 54 64 48Z;
+        M64 52C60 58 55 68 55 77C55 86 59 93 64 99C69 93 73 86 73 77C73 68 68 58 64 52Z;
+        M64 50C60 56 54 66 54 76C54 86 58 94 64 100C70 94 74 86 74 76C74 66 68 56 64 50Z"/>
+  </path>
+
+  <!-- ============ HOT CORE ============ -->
+  <path fill="url(#core)" opacity=".7">
+    <animate attributeName="d" dur="0.5s" repeatCount="indefinite"
+      values="
+        M64 72C60 78 56 84 58 92C60 97 62 100 64 101C66 100 68 97 70 92C72 84 68 78 64 72Z;
+        M64 70C60 76 55 83 57 91C59 97 61 100 64 102C67 100 69 97 71 91C73 83 68 76 64 70Z;
+        M64 74C60 80 57 85 59 93C61 97 63 100 64 100C65 100 67 97 69 93C71 85 68 80 64 74Z;
+        M64 72C60 78 56 84 58 92C60 97 62 100 64 101C66 100 68 97 70 92C72 84 68 78 64 72Z"/>
+    <animate attributeName="opacity" dur="0.4s" repeatCount="indefinite" values=".7;.55;.85;.65;.7"/>
+  </path>
+
+  <!-- ============ WHITE HOT CENTER ============ -->
+  <ellipse cx="64" cy="92" fill="#F0F9FF">
+    <animate attributeName="rx" dur="0.4s" repeatCount="indefinite" values="5;3.5;6;4;5"/>
+    <animate attributeName="ry" dur="0.4s" repeatCount="indefinite" values="7;5;8;6;7"/>
+    <animate attributeName="opacity" dur="0.35s" repeatCount="indefinite" values=".5;.3;.6;.35;.5"/>
+    <animate attributeName="cy" dur="0.6s" repeatCount="indefinite" values="92;90;93;91;92"/>
+  </ellipse>
+
+  <!-- ============ SPARKS / EMBERS ============ -->
+  <!-- Spark 1 - rises left -->
+  <circle r="1.2" fill="url(#spark)">
+    <animate attributeName="cx" dur="1.8s" repeatCount="indefinite" values="56;52;48;44"/>
+    <animate attributeName="cy" dur="1.8s" repeatCount="indefinite" values="40;28;16;4"/>
+    <animate attributeName="opacity" dur="1.8s" repeatCount="indefinite" values="0;.7;.5;0"/>
+    <animate attributeName="r" dur="1.8s" repeatCount="indefinite" values="1.2;1;.6;.2"/>
+  </circle>
+
+  <!-- Spark 2 - rises right -->
+  <circle r="1" fill="url(#spark)">
+    <animate attributeName="cx" dur="2s" repeatCount="indefinite" values="72;76;80;82"/>
+    <animate attributeName="cy" dur="2s" repeatCount="indefinite" values="36;22;10;0"/>
+    <animate attributeName="opacity" dur="2s" repeatCount="indefinite" values="0;.6;.4;0"/>
+    <animate attributeName="r" dur="2s" repeatCount="indefinite" values="1;.8;.5;.1"/>
+  </circle>
+
+  <!-- Spark 3 - rises center -->
+  <circle r="1.5" fill="#E0E7FF">
+    <animate attributeName="cx" dur="1.5s" repeatCount="indefinite" values="64;62;60;58"/>
+    <animate attributeName="cy" dur="1.5s" repeatCount="indefinite" values="32;18;6;-4"/>
+    <animate attributeName="opacity" dur="1.5s" repeatCount="indefinite" values="0;.8;.4;0"/>
+    <animate attributeName="r" dur="1.5s" repeatCount="indefinite" values="1.5;1.2;.7;.2"/>
+  </circle>
+
+  <!-- Spark 4 - rises far left -->
+  <circle r=".8" fill="#C4B5FD">
+    <animate attributeName="cx" dur="2.2s" repeatCount="indefinite" values="50;46;42;40"/>
+    <animate attributeName="cy" dur="2.2s" repeatCount="indefinite" values="46;32;18;6"/>
+    <animate attributeName="opacity" dur="2.2s" repeatCount="indefinite" values="0;.5;.3;0"/>
+    <animate attributeName="r" dur="2.2s" repeatCount="indefinite" values=".8;.6;.4;.1"/>
+  </circle>
+
+  <!-- Spark 5 - rises far right -->
+  <circle r=".9" fill="#67E8F9">
+    <animate attributeName="cx" dur="1.7s" repeatCount="indefinite" values="76;80;84;86" begin="0.3s"/>
+    <animate attributeName="cy" dur="1.7s" repeatCount="indefinite" values="42;26;12;0" begin="0.3s"/>
+    <animate attributeName="opacity" dur="1.7s" repeatCount="indefinite" values="0;.6;.3;0" begin="0.3s"/>
+    <animate attributeName="r" dur="1.7s" repeatCount="indefinite" values=".9;.7;.4;.1" begin="0.3s"/>
+  </circle>
+
+  <!-- Spark 6 - tiny center delayed -->
+  <circle r=".7" fill="#F0F9FF">
+    <animate attributeName="cx" dur="1.4s" repeatCount="indefinite" values="66;68;70;72" begin="0.6s"/>
+    <animate attributeName="cy" dur="1.4s" repeatCount="indefinite" values="28;14;4;-6" begin="0.6s"/>
+    <animate attributeName="opacity" dur="1.4s" repeatCount="indefinite" values="0;.7;.3;0" begin="0.6s"/>
+    <animate attributeName="r" dur="1.4s" repeatCount="indefinite" values=".7;.5;.3;0" begin="0.6s"/>
+  </circle>
+</svg>
